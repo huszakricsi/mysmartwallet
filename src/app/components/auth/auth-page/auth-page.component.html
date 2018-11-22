@@ -1,0 +1,143 @@
+<mat-card class="card">
+  <mat-card-content>
+    <mat-tab-group>
+      <mat-tab label="Log In" *ngIf="!(isLoggedIn$ | async)">
+        <mat-card-content>
+          <form>
+            <p>
+              <mat-form-field appearance="outline">
+                <mat-label>Enter your Email</mat-label>
+                <input
+                  matInput
+                  [(ngModel)]="userData.email"
+                  name="email"
+                  placeholder="Placeholder"
+                />
+                <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+                <mat-hint>Email</mat-hint>
+              </mat-form-field>
+            </p>
+            <p>
+              <mat-form-field appearance="outline">
+                <mat-label>Enter your Password</mat-label>
+                <input
+                  [(ngModel)]="userData.password"
+                  name="password"
+                  matInput
+                  [type]="hide ? 'text' : 'password'"
+                  placeholder="Placeholder"
+                />
+                <mat-icon matSuffix (click)="hide = !hide">{{
+                  hide ? "visibility" : "visibility_off"
+                }}</mat-icon>
+                <mat-hint>Password</mat-hint>
+              </mat-form-field>
+            </p>
+          </form>
+        </mat-card-content>
+        <mat-card-actions class="mat-card-actions">
+          <button mat-raised-button color="primary" (click)="Login()">
+            Login
+          </button>
+        </mat-card-actions>
+      </mat-tab>
+      <mat-tab label="Log Out" *ngIf="isLoggedIn$ | async">
+          <mat-card-header>
+              <mat-card-title>{{uid$ | async}}</mat-card-title>
+              <mat-card-subtitle>Hello!</mat-card-subtitle>
+            </mat-card-header>
+        <mat-card-actions class="mat-card-actions">
+          <button mat-raised-button color="primary" (click)="Logout()">
+            Logout
+          </button>
+        </mat-card-actions>
+      </mat-tab>
+      <mat-tab label="Register" *ngIf="!(isLoggedIn$ | async)">
+        <mat-card-content>
+          <form>
+            <p>
+              <mat-form-field appearance="outline">
+                <mat-label>Enter your nickname</mat-label>
+                <input
+                  [(ngModel)]="userData.nickname"
+                  name="nickname"
+                  matInput
+                  placeholder="Placeholder"
+                />
+                <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+                <mat-hint>Nickname</mat-hint>
+              </mat-form-field>
+            </p>
+            <p>
+              <mat-form-field appearance="outline">
+                <mat-label>Enter your Name</mat-label>
+                <input
+                  [(ngModel)]="userData.name"
+                  name="name"
+                  matInput
+                  placeholder="Placeholder"
+                />
+                <mat-icon matSuffix>person</mat-icon>
+                <mat-hint>Name</mat-hint>
+              </mat-form-field>
+            </p>
+            <p>
+              <mat-form-field appearance="outline">
+                <mat-label>Enter your Email</mat-label>
+                <input
+                  [(ngModel)]="userData.email"
+                  name="email"
+                  matInput
+                  placeholder="Placeholder"
+                />
+                <mat-icon matSuffix>email</mat-icon>
+                <mat-hint>Email</mat-hint>
+              </mat-form-field>
+            </p>
+            <p>
+              <mat-form-field appearance="outline">
+                <mat-label>Enter your Password</mat-label>
+                <input
+                  [(ngModel)]="userData.password"
+                  name="password"
+                  matInput
+                  [type]="hide ? 'text' : 'password'"
+                  placeholder="Placeholder"
+                />
+                <mat-icon matSuffix (click)="hide = !hide">{{
+                  hide ? "visibility" : "visibility_off"
+                }}</mat-icon>
+                <mat-hint>Password</mat-hint>
+              </mat-form-field>
+            </p>
+            <p>
+              <mat-form-field appearance="outline">
+                <mat-label>Enter your Password again</mat-label>
+                <input
+                  [(ngModel)]="userData.passwordConfirmation"
+                  name="passwordConfirmation"
+                  matInput
+                  [type]="hideConfirmation ? 'text' : 'password'"
+                  placeholder="Placeholder"
+                />
+                <mat-icon
+                  matSuffix
+                  (click)="hideConfirmation = !hideConfirmation"
+                  >{{
+                    hideConfirmation ? "visibility" : "visibility_off"
+                  }}</mat-icon
+                >
+                <mat-hint>Password Confirmation</mat-hint>
+              </mat-form-field>
+            </p>
+          </form>
+        </mat-card-content>
+        <mat-card-actions class="mat-card-actions"
+          ><button mat-raised-button color="primary" (click)="Register()">
+            Register
+          </button>
+        </mat-card-actions>
+      </mat-tab>
+    </mat-tab-group>
+  </mat-card-content>
+</mat-card>
