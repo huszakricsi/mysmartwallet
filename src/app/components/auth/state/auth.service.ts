@@ -4,6 +4,7 @@ import axios from "axios";
 import { Injectable } from "@angular/core";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { AuthQuery } from "./auth.query";
+import {environment} from "src/environments/environment";
 
 @Injectable({
   providedIn: "root"
@@ -12,7 +13,7 @@ export class AuthService {
   constructor(private authStore: AuthStore, private athQuery: AuthQuery, public snackBar: MatSnackBar) {}
   login(userData: {email: string, password: string}) {
     axios({
-      url: "https://mysmartwalletapi.herokuapp.com/auth/sign_in",
+      url: environment.api.auth.signInEndpoint,
       method: "POST",
       data: userData
     })
@@ -60,7 +61,7 @@ export class AuthService {
     name: string
   }) {
     axios({
-      url: "https://mysmartwalletapi.herokuapp.com/auth",
+      url: environment.api.authEndpoint,
       method: "POST",
       data: userData
     })
@@ -102,7 +103,7 @@ export class AuthService {
   
   logout() {
     axios({
-      url: "https://mysmartwalletapi.herokuapp.com/sign_out",
+      url: environment.api.auth.signOutEndpoint,
       method: "DELETE",
       headers: {
         'access-token': this.athQuery.accessToken,
