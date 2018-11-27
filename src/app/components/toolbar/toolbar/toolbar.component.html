@@ -3,27 +3,27 @@
     <mat-list>
       <mat-list-item>
         <button (click)="navigate('home')" mat-button>
-          home
+          {{ 'COMPONENT.TOOLBAR.HOME' | translate:param }}
         </button></mat-list-item
       >
       <mat-divider></mat-divider>
       <mat-list-item>
         <button (click)="navigate('statistics')" mat-button>
-          statistics
+            {{ 'COMPONENT.TOOLBAR.STATISTICS' | translate:param }}
         </button></mat-list-item
       >
       <mat-divider></mat-divider>
       <mat-list-item>
         <button (click)="navigate('transactions')" mat-button>
-          transactions
+            {{ 'COMPONENT.TOOLBAR.TRANSACTIONS' | translate:param }}
         </button></mat-list-item
       >
       <mat-divider></mat-divider>
       <mat-list-item>
         <mat-icon>language</mat-icon>
-        <button (click)="setLanguage('hu')" mat-button>hungarian</button>
+        <button (click)="setLanguage('hu')" mat-button>{{ 'COMPONENT.TOOLBAR.HUNGARIAN' | translate:param }}</button>
         <button (click)="setLanguage('en')" mat-button>
-          english
+            {{ 'COMPONENT.TOOLBAR.ENGLISH' | translate:param }}
         </button></mat-list-item
       >
     </mat-list>
@@ -36,10 +36,10 @@
             <mat-icon>menu</mat-icon>
           </button>
         </span>
-        <span class="middle">{{ this.location }}</span>
+        <span class="middle">{{ this.location.value }}</span>
         <span class="right">
           <button mat-stroked-button color="basic" (click)="logOut()">
-            Log Out
+              {{ 'COMPONENT.TOOLBAR.LOGOUT' | translate:param }}
           </button>
         </span>
       </mat-toolbar-row>

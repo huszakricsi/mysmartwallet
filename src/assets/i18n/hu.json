@@ -1,9 +1,17 @@
 {
   "LANGUAGE_SET": "Magyar nyelv lett beállítva.({{value}})",
   "COMPONENT": {
+    "AUTH": {},
     "HOME": {},
     "STATISTICS": {},
     "TRANSACTIONS": {},
-    "TOOLBAR": {}
+    "TOOLBAR": {
+      "HOME":"Áttekintés",
+      "STATISTICS":"Statisztikák",
+      "TRANSACTIONS":"Tranzakciók",
+      "LOGOUT":"Kijelentkezés",
+      "HUNGARIAN":"Magyar",
+      "ENGLISH":"Angol"
+    }
   }
 }

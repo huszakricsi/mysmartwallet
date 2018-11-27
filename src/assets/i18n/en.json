@@ -1,14 +1,17 @@
 {
   "LANGUAGE_SET": "Language set to english.({{value}})",
   "COMPONENT": {
-    "HOME":{
-
-    },
-    "STATISTICS":{
-
-    },
-    "TRANSACTIONS":{
-
+    "AUTH": {},
+    "HOME": {},
+    "STATISTICS": {},
+    "TRANSACTIONS": {},
+    "TOOLBAR": {
+      "HOME":"Home",
+      "STATISTICS":"Statistics",
+      "TRANSACTIONS":"Transactions",
+      "LOGOUT":"Log Out",
+      "HUNGARIAN":"Hungarian",
+      "ENGLISH":"English"
     }
   }
 }

@@ -19,7 +19,7 @@ import { ToolbarComponent } from "./components/toolbar/toolbar/toolbar.component
 import { MatSidenavModule } from "@angular/material/sidenav";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { StatisticsPageComponent } from "./components/statistics/statistics-page/statistics-page.component";
-import { TransactionsPageComponent } from "./transactions/transactions-page/transactions-page.component";
+import { TransactionsPageComponent } from "./components/transactions/transactions-page/transactions-page.component";
 import { MatDividerModule } from "@angular/material/divider";
 import { MatListModule } from "@angular/material/list";
 import { AngularWebStorageModule } from "angular-web-storage";

@@ -13,15 +13,22 @@ export class ToolbarComponent implements OnInit {
   
   @ViewChild('drawer') drawer;
 
-  location:string = 'home';
+  location = {key:'home', value:''};
 
-  constructor(private router:Router, private authService:AuthService, public local: LocalStorageService, private translate: TranslateService) { }
+  constructor(private router:Router, private authService:AuthService, public local: LocalStorageService, private translate: TranslateService) { 
+    this.translate.get('COMPONENT.TOOLBAR.HOME').subscribe((res:string)=>{
+      this.location.value = res;
+    });
+  }
 
   ngOnInit() {
   }
   public navigate(location:string)
   {
-    this.location=location;
+    this.location.key=location;
+    this.translate.get('COMPONENT.TOOLBAR.'+this.location.key.toUpperCase()).subscribe((res:string)=>{
+      this.location.value = res;
+    });
     this.router.navigateByUrl(location);
     this.drawer.toggle();
   }
@@ -31,6 +38,9 @@ export class ToolbarComponent implements OnInit {
     this.translate.use(language);
     this.translate.get('LANGUAGE_SET', {value: language}).subscribe((res:string)=>{
       console.log(res)
+    });
+    this.translate.get('COMPONENT.TOOLBAR.'+this.location.key.toUpperCase()).subscribe((res:string)=>{
+      this.location.value = res;
     });
     this.drawer.toggle();
   }

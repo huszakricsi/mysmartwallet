@@ -5,7 +5,7 @@ import { AuthGuard } from "./guards/auth-guard";
 import { HomePageComponent } from "../components/home/home-page/home-page.component";
 import { ToolbarComponent } from "../components/toolbar/toolbar/toolbar.component";
 import { StatisticsPageComponent } from "../components/statistics/statistics-page/statistics-page.component";
-import { TransactionsPageComponent } from "../transactions/transactions-page/transactions-page.component";
+import { TransactionsPageComponent } from "../components/transactions/transactions-page/transactions-page.component";
 
 const routes: Routes = [
   {
