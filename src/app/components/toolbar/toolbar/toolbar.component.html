@@ -3,27 +3,29 @@
     <mat-list>
       <mat-list-item>
         <button (click)="navigate('home')" mat-button>
-          {{ 'COMPONENT.TOOLBAR.HOME' | translate:param }}
+          <span translate>COMPONENT.TOOLBAR.HOME</span>
         </button></mat-list-item
       >
       <mat-divider></mat-divider>
       <mat-list-item>
         <button (click)="navigate('statistics')" mat-button>
-            {{ 'COMPONENT.TOOLBAR.STATISTICS' | translate:param }}
+          <span translate>COMPONENT.TOOLBAR.STATISTICS</span>
         </button></mat-list-item
       >
       <mat-divider></mat-divider>
       <mat-list-item>
         <button (click)="navigate('transactions')" mat-button>
-            {{ 'COMPONENT.TOOLBAR.TRANSACTIONS' | translate:param }}
+          <span translate>COMPONENT.TOOLBAR.TRANSACTIONS</span>
         </button></mat-list-item
       >
       <mat-divider></mat-divider>
       <mat-list-item>
         <mat-icon>language</mat-icon>
-        <button (click)="setLanguage('hu')" mat-button>{{ 'COMPONENT.TOOLBAR.HUNGARIAN' | translate:param }}</button>
+        <button (click)="setLanguage('hu')" mat-button>
+          <span translate>COMPONENT.TOOLBAR.HUNGARIAN</span>
+        </button>
         <button (click)="setLanguage('en')" mat-button>
-            {{ 'COMPONENT.TOOLBAR.ENGLISH' | translate:param }}
+          <span translate>COMPONENT.TOOLBAR.ENGLISH</span>
         </button></mat-list-item
       >
     </mat-list>
@@ -39,7 +41,7 @@
         <span class="middle">{{ this.location.value }}</span>
         <span class="right">
           <button mat-stroked-button color="basic" (click)="logOut()">
-              {{ 'COMPONENT.TOOLBAR.LOGOUT' | translate:param }}
+            <span translate>COMPONENT.TOOLBAR.LOGOUT</span>
           </button>
         </span>
       </mat-toolbar-row>
