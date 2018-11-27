@@ -1,124 +1,117 @@
 <mat-card class="card">
   <mat-card-content>
     <mat-tab-group>
-      <mat-tab label="Log In" *ngIf="!(isLoggedIn$ | async)">
+      <mat-tab label="{{ 'COMPONENT.AUTH.LOGINTAB' | translate:param }}" *ngIf="!(isLoggedIn$ | async)">
         <mat-card-content>
           <form>
             <p>
               <mat-form-field appearance="outline">
-                <mat-label>Enter your Email</mat-label>
+                <mat-label>{{ 'COMPONENT.AUTH.ENTERYOUREMAIL' | translate:param }}</mat-label>
                 <input
                   matInput
                   [(ngModel)]="userData.email"
                   name="email"
-                  placeholder="Placeholder"
                 />
                 <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-                <mat-hint>Email</mat-hint>
+                <mat-hint>{{ 'COMPONENT.AUTH.EMAIL' | translate:param }}</mat-hint>
               </mat-form-field>
             </p>
             <p>
               <mat-form-field appearance="outline">
-                <mat-label>Enter your Password</mat-label>
+                <mat-label>{{ 'COMPONENT.AUTH.ENTERYOURPASSWORD' | translate:param }}</mat-label>
                 <input
                   [(ngModel)]="userData.password"
                   name="password"
                   matInput
                   [type]="hide ? 'text' : 'password'"
-                  placeholder="Placeholder"
                 />
                 <mat-icon matSuffix (click)="hide = !hide">{{
                   hide ? "visibility" : "visibility_off"
                 }}</mat-icon>
-                <mat-hint>Password</mat-hint>
+                <mat-hint>{{ 'COMPONENT.AUTH.PASSWORD' | translate:param }}</mat-hint>
               </mat-form-field>
             </p>
           </form>
         </mat-card-content>
         <mat-card-actions class="mat-card-actions">
           <button mat-raised-button color="primary" (click)="Login()">
-            Login
+              {{ 'COMPONENT.AUTH.LOGIN' | translate:param }}
           </button>
         </mat-card-actions>
       </mat-tab>
-      <mat-tab label="Log Out" *ngIf="isLoggedIn$ | async">
-          <mat-card-header>
-              <mat-card-title>{{uid$ | async}}</mat-card-title>
-              <mat-card-subtitle>Hello!</mat-card-subtitle>
-            </mat-card-header>
+      <mat-tab label="{{ 'COMPONENT.AUTH.LOGOUTTAB' | translate:param }}" *ngIf="(isLoggedIn$ | async)">
+        <mat-card-header>
+          <mat-card-title>{{ uid$ | async }}</mat-card-title>
+          <mat-card-subtitle>{{ 'COMPONENT.AUTH.HELLO' | translate:param }}</mat-card-subtitle>
+        </mat-card-header>
         <mat-card-actions class="mat-card-actions">
           <button mat-raised-button color="primary" (click)="Logout()">
-            Logout
+              {{ 'COMPONENT.AUTH.LOGOUT' | translate:param }}
           </button>
         </mat-card-actions>
       </mat-tab>
-      <mat-tab label="Register" *ngIf="!(isLoggedIn$ | async)">
+      <mat-tab label="{{ 'COMPONENT.AUTH.REGISTERTAB' | translate:param }}" *ngIf="!(isLoggedIn$ | async)">
         <mat-card-content>
           <form>
             <p>
               <mat-form-field appearance="outline">
-                <mat-label>Enter your nickname</mat-label>
+                <mat-label>{{ 'COMPONENT.AUTH.ENTERYOURNICKNAME' | translate:param }}</mat-label>
                 <input
                   [(ngModel)]="userData.nickname"
                   name="nickname"
                   matInput
-                  placeholder="Placeholder"
                 />
                 <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-                <mat-hint>Nickname</mat-hint>
+                <mat-hint>{{ 'COMPONENT.AUTH.NICKNAME' | translate:param }}</mat-hint>
               </mat-form-field>
             </p>
             <p>
               <mat-form-field appearance="outline">
-                <mat-label>Enter your Name</mat-label>
+                <mat-label>{{ 'COMPONENT.AUTH.ENTERYOURNAME' | translate:param }}</mat-label>
                 <input
                   [(ngModel)]="userData.name"
                   name="name"
                   matInput
-                  placeholder="Placeholder"
                 />
                 <mat-icon matSuffix>person</mat-icon>
-                <mat-hint>Name</mat-hint>
+                <mat-hint>{{ 'COMPONENT.AUTH.NAME' | translate:param }}</mat-hint>
               </mat-form-field>
             </p>
             <p>
               <mat-form-field appearance="outline">
-                <mat-label>Enter your Email</mat-label>
+                <mat-label>{{ 'COMPONENT.AUTH.ENTERYOUREMAIL' | translate:param }}</mat-label>
                 <input
                   [(ngModel)]="userData.email"
                   name="email"
                   matInput
-                  placeholder="Placeholder"
                 />
                 <mat-icon matSuffix>email</mat-icon>
-                <mat-hint>Email</mat-hint>
+                <mat-hint>{{ 'COMPONENT.AUTH.EMAIL' | translate:param }}</mat-hint>
               </mat-form-field>
             </p>
             <p>
               <mat-form-field appearance="outline">
-                <mat-label>Enter your Password</mat-label>
+                <mat-label>{{ 'COMPONENT.AUTH.ENTERYOURPASSWORD' | translate:param }}</mat-label>
                 <input
                   [(ngModel)]="userData.password"
                   name="password"
                   matInput
                   [type]="hide ? 'text' : 'password'"
-                  placeholder="Placeholder"
                 />
                 <mat-icon matSuffix (click)="hide = !hide">{{
                   hide ? "visibility" : "visibility_off"
                 }}</mat-icon>
-                <mat-hint>Password</mat-hint>
+                <mat-hint>{{ 'COMPONENT.AUTH.PASSWORD' | translate:param }}</mat-hint>
               </mat-form-field>
             </p>
             <p>
               <mat-form-field appearance="outline">
-                <mat-label>Enter your Password again</mat-label>
+                <mat-label>{{ 'COMPONENT.AUTH.ENTERYOURPASSWORDAGAIN' | translate:param }}</mat-label>
                 <input
                   [(ngModel)]="userData.passwordConfirmation"
                   name="passwordConfirmation"
                   matInput
                   [type]="hideConfirmation ? 'text' : 'password'"
-                  placeholder="Placeholder"
                 />
                 <mat-icon
                   matSuffix
@@ -127,17 +120,31 @@
                     hideConfirmation ? "visibility" : "visibility_off"
                   }}</mat-icon
                 >
-                <mat-hint>Password Confirmation</mat-hint>
+                <mat-hint>{{ 'COMPONENT.AUTH.PASSWORDCONFIRMATION' | translate:param }}</mat-hint>
               </mat-form-field>
             </p>
           </form>
         </mat-card-content>
         <mat-card-actions class="mat-card-actions"
           ><button mat-raised-button color="primary" (click)="Register()">
-            Register
+              {{ 'COMPONENT.AUTH.REGISTER' | translate:param }}
           </button>
         </mat-card-actions>
       </mat-tab>
     </mat-tab-group>
+    <mat-divider></mat-divider>
+    <mat-list class="languages">
+        <mat-list-item>
+        <span>
+            <mat-icon class="language">language</mat-icon>
+        </span>
+      <button (click)="setLanguage('hu')" mat-button>
+        {{ "COMPONENT.AUTH.HUNGARIAN" | translate: param }}
+      </button>
+      <button (click)="setLanguage('en')" mat-button>
+        {{ "COMPONENT.AUTH.ENGLISH" | translate: param }}
+      </button>
+      </mat-list-item>
+    </mat-list>
   </mat-card-content>
 </mat-card>

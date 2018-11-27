@@ -1,7 +1,32 @@
 {
   "LANGUAGE_SET": "Magyar nyelv lett beállítva.({{value}})",
   "COMPONENT": {
-    "AUTH": {},
+    "AUTH": {
+      "HUNGARIAN":"Magyar",
+      "ENGLISH":"Angol",
+      "HELLO":"Üdv!",
+      "LOGINTAB":"Jelentkezz be!",
+      "REGISTERTAB":"Regisztrálj!",
+      "LOGOUTTAB":"Jelentkezz ki!",
+      "LOGIN":"Bejelentkezés",
+      "REGISTER":"Regisztráció",
+      "EMAIL":"E-mail",
+      "PASSWORD":"Jelszó",
+      "PASSWORDCONFIRMATION":"Jelszó megerősítés",
+      "NAME":"Név",
+      "NICKNAME":"Becenév",
+      "ENTERYOURNAME":"Írd be a neved!",
+      "ENTERYOUREMAIL":"Add meg az email címed!",
+      "ENTERYOURPASSWORD":"Írd be a jelszavad!",
+      "ENTERYOURPASSWORDAGAIN":"Erősítsd meg a jelszavad!",
+      "ENTERYOURNICKNAME":"Add meg a beceneved!",
+      "AUTHSTATE":{
+        "LOGGEDIN":" bejelentkezett!",
+        "OK":"Rendben!",
+        "REGISTERED":"Épp bejelentkeztél regisztráció után!",
+        "GOODBYE":"Szia, vigyázz magadra!"
+      }
+    },
     "HOME": {},
     "STATISTICS": {},
     "TRANSACTIONS": {},

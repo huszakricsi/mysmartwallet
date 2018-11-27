@@ -4,6 +4,8 @@ import { AuthService } from "../state/auth.service";
 import { Observable } from "rxjs";
 import { ID } from "@datorama/akita";
 import { Router } from "@angular/router";
+import { LocalStorageService } from "angular-web-storage";
+import { TranslateService } from "@ngx-translate/core";
 
 @Component({
   selector: "app-auth-page",
@@ -24,18 +26,23 @@ export class AuthPageComponent implements OnInit {
     this.isLoggedIn$ = this.authQuery.isLoggedIn$;
     this.uid$ = this.authQuery.uid$;
     this.isLoggedIn$.subscribe(v => {
-      console.log("Logged in: " + v);
       if (v) {
         this.router.navigate([""]);
-      }
-      else{
+      } else {
         this.router.navigate(["authentication"]);
       }
     });
   }
-  constructor(private authQuery: AuthQuery, private authService: AuthService, public router: Router) {}
+  constructor(
+    private authQuery: AuthQuery,
+    private authService: AuthService,
+    public router: Router,
+    public local: LocalStorageService,
+    private translate: TranslateService
+  ) {}
   Register(): void {
-    console.log(this.userData);1
+    console.log(this.userData);
+    1;
     this.authService.register({
       name: this.userData.name,
       email: this.userData.email,
@@ -45,9 +52,21 @@ export class AuthPageComponent implements OnInit {
     });
   }
   Login(): void {
-    this.authService.login({email: this.userData.email, password: this.userData.password});
+    this.authService.login({
+      email: this.userData.email,
+      password: this.userData.password
+    });
   }
-  Logout(): void{
+  Logout(): void {
     this.authService.logout();
+  }
+  public setLanguage(language: string) {
+    this.local.set("language", language);
+    this.translate.use(language);
+    this.translate
+      .get("LANGUAGE_SET", { value: language })
+      .subscribe((res: string) => {
+        console.log(res);
+      });
   }
 }

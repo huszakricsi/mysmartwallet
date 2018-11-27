@@ -6,6 +6,7 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 import { AuthQuery } from "./auth.query";
 import { environment } from "src/environments/environment";
 import { LocalStorageService } from "angular-web-storage";
+import { TranslateService } from "@ngx-translate/core";
 
 @Injectable({
   providedIn: "root"
@@ -15,16 +16,16 @@ export class AuthService {
     private authStore: AuthStore,
     private authQuery: AuthQuery,
     public snackBar: MatSnackBar,
-    public local: LocalStorageService
+    public local: LocalStorageService,
+    private translate: TranslateService
   ) {
-    try{
-       let auth = createAuth(local.get("auth"));
-       this.authStore.update(auth);
-    }
-    catch(e){}  
-    authQuery.auth$.subscribe(auth=>{
-      this.local.set('auth', auth);
-    });  
+    try {
+      let auth = createAuth(local.get("auth"));
+      this.authStore.update(auth);
+    } catch (e) {}
+    authQuery.auth$.subscribe(auth => {
+      this.local.set("auth", auth);
+    });
   }
   login(userData: { email: string; password: string }) {
     axios({
@@ -41,18 +42,30 @@ export class AuthService {
           createAuth({ uid, client, accessToken, expiry, tokenType: "Bearer" })
         );
         if (!!this.snackBar) {
-          this.snackBar.open(uid + " logged in.", "Ok", {
-            duration: 2000
-          });
+          this.translate
+            .get("COMPONENT.AUTH.AUTHSTATE.LOGGEDIN")
+            .subscribe((msg: string) => {
+              this.translate
+                .get("COMPONENT.AUTH.AUTHSTATE.OK")
+                .subscribe((ok: string) => {
+                  this.snackBar.open(uid + msg, ok, {
+                    duration: 2000
+                  });
+                });
+            });
         }
       })
       .catch((error: any) => {
         error.response.data.errors.forEach(
           function(error) {
             if (!!this.snackBar) {
-              this.snackBar.open(error, "Ok", {
-                duration: 2000
-              });
+              this.translate
+                .get("COMPONENT.AUTH.AUTHSTATE.OK")
+                .subscribe((ok: string) => {
+                  this.snackBar.open(error, ok, {
+                    duration: 2000
+                  });
+                });
             }
           }.bind(this)
         );
@@ -89,18 +102,30 @@ export class AuthService {
           createAuth({ uid, client, accessToken, expiry, tokenType: "Bearer" })
         );
         if (!!this.snackBar) {
-          this.snackBar.open(uid + " logged in.", "Ok", {
-            duration: 2000
-          });
+          this.translate
+            .get("COMPONENT.AUTH.AUTHSTATE.REGISTERED")
+            .subscribe((msg: string) => {
+              this.translate
+                .get("COMPONENT.AUTH.AUTHSTATE.OK")
+                .subscribe((ok: string) => {
+                  this.snackBar.open(uid + msg, ok, {
+                    duration: 2000
+                  });
+                });
+            });
         }
       })
       .catch((error: any) => {
         error.response.data.errors.full_messages.forEach(
           function(error) {
             if (!!this.snackBar) {
-              this.snackBar.open(error, "Ok", {
-                duration: 2000
-              });
+              this.translate
+                .get("COMPONENT.AUTH.AUTHSTATE.OK")
+                .subscribe((ok: string) => {
+                  this.snackBar.open(error, ok, {
+                    duration: 2000
+                  });
+                });
             }
           }.bind(this)
         );
@@ -137,18 +162,30 @@ export class AuthService {
           })
         );
         if (!!this.snackBar) {
-          this.snackBar.open("Goodbye! You logged out.", "Ok", {
-            duration: 2000
-          });
+          this.translate
+            .get("COMPONENT.AUTH.AUTHSTATE.GOODBYE")
+            .subscribe((msg: string) => {
+              this.translate
+                .get("COMPONENT.AUTH.AUTHSTATE.OK")
+                .subscribe((ok: string) => {
+                  this.snackBar.open(msg, ok, {
+                    duration: 2000
+                  });
+                });
+            });
         }
       })
       .catch((error: any) => {
         error.response.data.errors.full_messages.forEach(
           function(error) {
             if (!!this.snackBar) {
-              this.snackBar.open(error, "Ok", {
-                duration: 2000
-              });
+              this.translate
+                .get("COMPONENT.AUTH.AUTHSTATE.OK")
+                .subscribe((ok: string) => {
+                  this.snackBar.open(error, ok, {
+                    duration: 2000
+                  });
+                });
             }
           }.bind(this)
         );

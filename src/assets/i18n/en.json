@@ -1,7 +1,32 @@
 {
   "LANGUAGE_SET": "Language set to english.({{value}})",
   "COMPONENT": {
-    "AUTH": {},
+    "AUTH": {
+      "HUNGARIAN":"Hungarian",
+      "ENGLISH":"English",
+      "HELLO":"Hello!",
+      "LOGINTAB":"Login!",
+      "REGISTERTAB":"Register!",
+      "LOGOUTTAB":"Log out!",
+      "LOGIN":"Login",
+      "REGISTER":"Register",
+      "EMAIL":"E-mail",
+      "PASSWORD":"Password",
+      "PASSWORDCONFIRMATION":"Password confirmation",
+      "NAME":"Name",
+      "NICKNAME":"Nickname",
+      "ENTERYOURNAME":"Enter your name!",
+      "ENTERYOUREMAIL":"Enter your email!",
+      "ENTERYOURPASSWORD":"Enter your password!",
+      "ENTERYOURPASSWORDAGAIN":"Enter your password again!",
+      "ENTERYOURNICKNAME":"Enter your nickname!",
+      "AUTHSTATE":{
+        "LOGGEDIN":" logged in!",
+        "OK":"Ok!",
+        "REGISTERED":"You've just registered and logged in!",
+        "GOODBYE":"Goodbye, take care!"
+      }
+    },
     "HOME": {},
     "STATISTICS": {},
     "TRANSACTIONS": {},
