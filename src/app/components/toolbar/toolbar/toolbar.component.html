@@ -1,0 +1,49 @@
+<mat-drawer-container class="container" autosize>
+  <mat-drawer #drawer class="sidenav" mode="side">
+    <mat-list>
+      <mat-list-item>
+        <button (click)="navigate('home')" mat-button>
+          home
+        </button></mat-list-item
+      >
+      <mat-divider></mat-divider>
+      <mat-list-item>
+        <button (click)="navigate('statistics')" mat-button>
+          statistics
+        </button></mat-list-item
+      >
+      <mat-divider></mat-divider>
+      <mat-list-item>
+        <button (click)="navigate('transactions')" mat-button>
+          transactions
+        </button></mat-list-item
+      >
+      <mat-divider></mat-divider>
+      <mat-list-item>
+        <mat-icon>language</mat-icon>
+        <button (click)="setLanguage('hungarian')" mat-button>hungarian</button>
+        <button (click)="setLanguage('english')" mat-button>
+          english
+        </button></mat-list-item
+      >
+    </mat-list>
+  </mat-drawer>
+  <div class="sidenav-content">
+    <mat-toolbar color="primary">
+      <mat-toolbar-row>
+        <span class="left">
+          <button mat-fab color="primary" (click)="drawer.toggle()">
+            <mat-icon>menu</mat-icon>
+          </button>
+        </span>
+        <span class="middle">{{ this.location }}</span>
+        <span class="right">
+          <button mat-stroked-button color="basic" (click)="logOut()">
+            Log Out
+          </button>
+        </span>
+      </mat-toolbar-row>
+    </mat-toolbar>
+    <router-outlet></router-outlet>
+  </div>
+</mat-drawer-container>

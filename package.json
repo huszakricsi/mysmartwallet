@@ -25,6 +25,7 @@
     "@angular/router": "^6.1.0",
     "@datorama/akita": "^1.21.0",
     "angular-particle": "^1.0.4",
+    "angular-web-storage": "^4.1.0",
     "axios": "^0.18.0",
     "core-js": "^2.5.4",
     "express": "^4.16.4",

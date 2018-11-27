@@ -4,14 +4,29 @@ import axios from "axios";
 import { Injectable } from "@angular/core";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { AuthQuery } from "./auth.query";
-import {environment} from "src/environments/environment";
+import { environment } from "src/environments/environment";
+import { LocalStorageService } from "angular-web-storage";
 
 @Injectable({
   providedIn: "root"
 })
 export class AuthService {
-  constructor(private authStore: AuthStore, private athQuery: AuthQuery, public snackBar: MatSnackBar) {}
-  login(userData: {email: string, password: string}) {
+  constructor(
+    private authStore: AuthStore,
+    private authQuery: AuthQuery,
+    public snackBar: MatSnackBar,
+    public local: LocalStorageService
+  ) {
+    try{
+       let auth = createAuth(local.get("auth"));
+       this.authStore.update(auth);
+    }
+    catch(e){}  
+    authQuery.auth$.subscribe(auth=>{
+      this.local.set('auth', auth);
+    });  
+  }
+  login(userData: { email: string; password: string }) {
     axios({
       url: environment.api.auth.signInEndpoint,
       method: "POST",
@@ -54,11 +69,11 @@ export class AuthService {
   }
 
   register(userData: {
-    email: string,
-    password: string,
-    password_confirmation: string,
-    nickname: string,
-    name: string
+    email: string;
+    password: string;
+    password_confirmation: string;
+    nickname: string;
+    name: string;
   }) {
     axios({
       url: environment.api.authEndpoint,
@@ -100,15 +115,15 @@ export class AuthService {
         );
       });
   }
-  
+
   logout() {
     axios({
       url: environment.api.auth.signOutEndpoint,
       method: "DELETE",
       headers: {
-        'access-token': this.athQuery.accessToken,
-        'client': this.athQuery.client,
-        'uid': this.athQuery.uid
+        "access-token": this.authQuery.accessToken,
+        client: this.authQuery.client,
+        uid: this.authQuery.uid
       }
     })
       .then((response: any) => {
@@ -118,7 +133,8 @@ export class AuthService {
             client: "",
             accessToken: "",
             expiry: "",
-            tokenType: "Bearer" })
+            tokenType: "Bearer"
+          })
         );
         if (!!this.snackBar) {
           this.snackBar.open("Goodbye! You logged out.", "Ok", {

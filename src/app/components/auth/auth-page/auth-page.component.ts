@@ -2,8 +2,8 @@ import { Component, OnInit, ViewContainerRef } from "@angular/core";
 import { AuthQuery } from "../state/auth.query";
 import { AuthService } from "../state/auth.service";
 import { Observable } from "rxjs";
-import { Auth } from "../state/auth.model";
 import { ID } from "@datorama/akita";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-auth-page",
@@ -25,9 +25,15 @@ export class AuthPageComponent implements OnInit {
     this.uid$ = this.authQuery.uid$;
     this.isLoggedIn$.subscribe(v => {
       console.log("Logged in: " + v);
+      if (v) {
+        this.router.navigate([""]);
+      }
+      else{
+        this.router.navigate(["authentication"]);
+      }
     });
   }
-  constructor(private authQuery: AuthQuery, private authService: AuthService) {}
+  constructor(private authQuery: AuthQuery, private authService: AuthService, public router: Router) {}
   Register(): void {
     console.log(this.userData);1
     this.authService.register({

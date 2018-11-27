@@ -13,12 +13,27 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { ParticlesModule } from 'angular-particle';
+import { AppRoutingModule } from './routing/app-routing.module';
+import { HomePageComponent } from './components/home/home-page/home-page.component';
+import { ToolbarComponent } from './components/toolbar/toolbar/toolbar.component';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import { StatisticsPageComponent } from './components/statistics/statistics-page/statistics-page.component';
+import { TransactionsPageComponent } from './transactions/transactions-page/transactions-page.component';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatListModule} from '@angular/material/list';
+import { AngularWebStorageModule } from 'angular-web-storage';
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    AuthPageComponent
+    AuthPageComponent,
+    HomePageComponent,
+    ToolbarComponent,
+    StatisticsPageComponent,
+    TransactionsPageComponent
   ],
   imports: [
     BrowserModule,
@@ -31,7 +46,13 @@ import { ParticlesModule } from 'angular-particle';
     MatIconModule,
     MatInputModule,
     FormsModule,
-    ParticlesModule
+    ParticlesModule,
+    AppRoutingModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    MatDividerModule,
+    MatListModule,
+    AngularWebStorageModule 
   ],
   providers: [],
   bootstrap: [AppComponent]
