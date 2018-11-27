@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../auth/state/auth.service';
+import { LocalStorageService } from 'angular-web-storage';
 
 @Component({
   selector: 'app-toolbar',
@@ -13,7 +14,7 @@ export class ToolbarComponent implements OnInit {
 
   location:string = 'home';
 
-  constructor(private router:Router, private authService:AuthService) { }
+  constructor(private router:Router, private authService:AuthService, public local: LocalStorageService) { }
 
   ngOnInit() {
   }
@@ -25,6 +26,7 @@ export class ToolbarComponent implements OnInit {
   }
   public setLanguage(language:string)
   {
+    this.local.set('language',language);
     this.drawer.toggle();
   }
   public logOut(){
