@@ -21,6 +21,7 @@
       "ENTERYOURPASSWORDAGAIN":"Erősítsd meg a jelszavad!",
       "ENTERYOURNICKNAME":"Add meg a beceneved!",
       "AUTHSTATE":{
+        "LANGUAGE_SETTINGS_SAVED_ON_DEVICE":"Nyelvi beállítások mentésre kerültek az eszközön!",
         "LOGGEDIN":" bejelentkezett!",
         "OK":"Rendben!",
         "REGISTERED":"Épp bejelentkeztél regisztráció után!",
@@ -31,6 +32,8 @@
     "STATISTICS": {},
     "TRANSACTIONS": {},
     "TOOLBAR": {
+      "OK":"Rendben!",
+      "LANGUAGE_SETTINGS_SAVED_ON_DEVICE":"Nyelvi beállítások mentésre kerültek az eszközön!",
       "HOME":"Áttekintés",
       "STATISTICS":"Statisztikák",
       "TRANSACTIONS":"Tranzakciók",

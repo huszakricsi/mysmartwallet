@@ -6,6 +6,7 @@ import { ID } from "@datorama/akita";
 import { Router } from "@angular/router";
 import { LocalStorageService } from "angular-web-storage";
 import { TranslateService } from "@ngx-translate/core";
+import { MatSnackBar } from "@angular/material/snack-bar";
 
 @Component({
   selector: "app-auth-page",
@@ -38,7 +39,8 @@ export class AuthPageComponent implements OnInit {
     private authService: AuthService,
     public router: Router,
     public local: LocalStorageService,
-    private translate: TranslateService
+    private translate: TranslateService,
+    public snackBar: MatSnackBar
   ) {}
   Register(): void {
     console.log(this.userData);
@@ -67,6 +69,19 @@ export class AuthPageComponent implements OnInit {
       .get("LANGUAGE_SET", { value: language })
       .subscribe((res: string) => {
         console.log(res);
+      });
+    this.translate
+      .get("COMPONENT.AUTH.AUTHSTATE.LANGUAGE_SETTINGS_SAVED_ON_DEVICE", {
+        value: language
+      })
+      .subscribe((msg: string) => {
+        this.translate
+          .get("COMPONENT.AUTH.AUTHSTATE.OK")
+          .subscribe((ok: string) => {
+            this.snackBar.open(msg, ok, {
+              duration: 3000
+            });
+          });
       });
   }
 }

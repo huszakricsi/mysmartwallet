@@ -21,6 +21,7 @@
       "ENTERYOURPASSWORDAGAIN":"Enter your password again!",
       "ENTERYOURNICKNAME":"Enter your nickname!",
       "AUTHSTATE":{
+        "LANGUAGE_SETTINGS_SAVED_ON_DEVICE":"Language settings saved on device!",
         "LOGGEDIN":" logged in!",
         "OK":"Ok!",
         "REGISTERED":"You've just registered and logged in!",
@@ -31,6 +32,8 @@
     "STATISTICS": {},
     "TRANSACTIONS": {},
     "TOOLBAR": {
+      "OK":"Ok!",
+      "LANGUAGE_SETTINGS_SAVED_ON_DEVICE":"Language settings saved on device!",
       "HOME":"Home",
       "STATISTICS":"Statistics",
       "TRANSACTIONS":"Transactions",
