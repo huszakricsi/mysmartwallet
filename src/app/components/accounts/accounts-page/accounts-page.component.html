@@ -1,0 +1,3 @@
+<div *ngFor="let c of (this.accountQuery.Accounts$ | async)">
+  {{ c.name }} : {{ c.balance }} {{ c.currency }}
+</div>

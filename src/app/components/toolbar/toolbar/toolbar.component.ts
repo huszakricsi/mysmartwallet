@@ -4,6 +4,7 @@ import { AuthService } from "../../auth/state/auth.service";
 import { LocalStorageService } from "angular-web-storage";
 import { TranslateService } from "@ngx-translate/core";
 import { MatSnackBar } from "@angular/material/snack-bar";
+import { AccountService } from "../../accounts/state/account.service";
 
 @Component({
   selector: "app-toolbar",
@@ -20,14 +21,17 @@ export class ToolbarComponent implements OnInit {
     private authService: AuthService,
     public local: LocalStorageService,
     private translate: TranslateService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private accountService:AccountService
   ) {
     this.translate.get("COMPONENT.TOOLBAR.HOME").subscribe((res: string) => {
       this.location.value = res;
     });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.accountService.fetchAccounts();
+  }
   public navigate(location: string) {
     this.location.key = location;
     this.translate

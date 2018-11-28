@@ -21,7 +21,23 @@ export class AuthService {
   ) {
     try {
       let auth = createAuth(local.get("auth"));
-      this.authStore.update(auth);
+      axios({
+        url: environment.api.auth.validateEndpoint,
+        method: "GET",
+        headers: {
+          'access-token': auth.accessToken,
+          'client': auth.client,
+          'uid': auth.uid,
+          'expiry': auth.expiry,
+          'token-type': 'Bearer'
+        }
+      })
+        .then((response: any) => {
+          this.authStore.update(auth);
+        })
+        .catch((exception: any)=>{
+          local.remove("auth");
+        })
     } catch (e) {}
     authQuery.auth$.subscribe(auth => {
       this.local.set("auth", auth);

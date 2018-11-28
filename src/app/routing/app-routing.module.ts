@@ -6,6 +6,7 @@ import { HomePageComponent } from "../components/home/home-page/home-page.compon
 import { ToolbarComponent } from "../components/toolbar/toolbar/toolbar.component";
 import { StatisticsPageComponent } from "../components/statistics/statistics-page/statistics-page.component";
 import { TransactionsPageComponent } from "../components/transactions/transactions-page/transactions-page.component";
+import { AccountsPageComponent } from "../components/accounts/accounts-page/accounts-page.component";
 
 const routes: Routes = [
   {
@@ -32,6 +33,11 @@ const routes: Routes = [
         path: "transactions",
         canActivate: [AuthGuard],
         component: TransactionsPageComponent
+      },
+      {
+        path: "accounts",
+        canActivate: [AuthGuard],
+        component: AccountsPageComponent
       }
     ]
   },

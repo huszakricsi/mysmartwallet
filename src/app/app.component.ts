@@ -8,7 +8,7 @@ import { TranslateService } from "@ngx-translate/core";
   styleUrls: ["./app.component.css"]
 })
 export class AppComponent {
-  constructor(public local: LocalStorageService, translate: TranslateService){
+  constructor( public local: LocalStorageService, translate: TranslateService){
     translate.setDefaultLang('en');
     let language = !!this.local.get('language')?this.local.get('language'):'en';
     translate.use(language);

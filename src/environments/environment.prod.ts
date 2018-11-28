@@ -6,7 +6,9 @@ export const environment = {
     authEndpoint: apiurl + "auth",
     auth: {
       signOutEndpoint: apiurl + "auth/sign_out",
-      signInEndpoint: apiurl + "auth/sign_in"
-    }
+      signInEndpoint: apiurl + "auth/sign_in",
+      validateEndpoint: apiurl + "auth/validate_token"
+    },
+    accountsEndpoint: apiurl+"accounts"
   }
 };

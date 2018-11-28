@@ -31,12 +31,14 @@
     "HOME": {},
     "STATISTICS": {},
     "TRANSACTIONS": {},
+    "ACCOUNTS": {},
     "TOOLBAR": {
       "OK":"Ok!",
       "LANGUAGE_SETTINGS_SAVED_ON_DEVICE":"Language settings saved on device!",
       "HOME":"Home",
       "STATISTICS":"Statistics",
       "TRANSACTIONS":"Transactions",
+      "ACCOUNTS":"Accounts",
       "LOGOUT":"Log Out",
       "HUNGARIAN":"Hungarian",
       "ENGLISH":"English"

@@ -31,12 +31,14 @@
     "HOME": {},
     "STATISTICS": {},
     "TRANSACTIONS": {},
+    "ACCOUNTS": {},
     "TOOLBAR": {
       "OK":"Rendben!",
       "LANGUAGE_SETTINGS_SAVED_ON_DEVICE":"Nyelvi beállítások mentésre kerültek az eszközön!",
       "HOME":"Áttekintés",
       "STATISTICS":"Statisztikák",
       "TRANSACTIONS":"Tranzakciók",
+      "ACCOUNTS":"Fiókok",
       "LOGOUT":"Kijelentkezés",
       "HUNGARIAN":"Magyar",
       "ENGLISH":"Angol"
