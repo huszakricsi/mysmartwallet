@@ -25,8 +25,12 @@ import { MatListModule } from "@angular/material/list";
 import { AngularWebStorageModule } from "angular-web-storage";
 import { TranslateModule, TranslateLoader } from "@ngx-translate/core";
 import { TranslateHttpLoader } from "@ngx-translate/http-loader";
-import {  HttpClient, HttpClientModule } from "@angular/common/http";
-import { AccountsPageComponent } from './components/accounts/accounts-page/accounts-page.component';
+import { HttpClient, HttpClientModule } from "@angular/common/http";
+import { AccountsPageComponent } from "./components/accounts/accounts-page/accounts-page.component";
+import { MatExpansionModule } from "@angular/material/expansion";
+import { MatSelectModule } from "@angular/material/select";
+import { MatDialogModule } from "@angular/material/dialog";
+import { DeleteConfirmationDialogComponent } from "./components/accounts/delete-confirmation-dialog/delete-confirmation-dialog.component";
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
@@ -40,7 +44,8 @@ export function createTranslateLoader(http: HttpClient) {
     ToolbarComponent,
     StatisticsPageComponent,
     TransactionsPageComponent,
-    AccountsPageComponent
+    AccountsPageComponent,
+    DeleteConfirmationDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -52,6 +57,7 @@ export function createTranslateLoader(http: HttpClient) {
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
+    MatExpansionModule,
     FormsModule,
     ParticlesModule,
     AppRoutingModule,
@@ -59,17 +65,20 @@ export function createTranslateLoader(http: HttpClient) {
     MatToolbarModule,
     MatDividerModule,
     MatListModule,
+    MatSelectModule,
     AngularWebStorageModule,
     HttpClientModule,
+    MatDialogModule,
     TranslateModule.forRoot({
       loader: {
-          provide: TranslateLoader,
-          useFactory: (createTranslateLoader),
-          deps: [HttpClient]
+        provide: TranslateLoader,
+        useFactory: createTranslateLoader,
+        deps: [HttpClient]
       }
-  })
+    })
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [DeleteConfirmationDialogComponent]
 })
 export class AppModule {}

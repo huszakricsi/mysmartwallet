@@ -39,7 +39,7 @@ export class AuthPageComponent implements OnInit {
     private authService: AuthService,
     public router: Router,
     public local: LocalStorageService,
-    private translate: TranslateService,
+    public translate: TranslateService,
     public snackBar: MatSnackBar
   ) {}
   Register(): void {

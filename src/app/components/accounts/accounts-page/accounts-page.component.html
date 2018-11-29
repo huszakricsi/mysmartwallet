@@ -1,3 +1,85 @@
-<div *ngFor="let c of (this.accountQuery.Accounts$ | async)">
-  {{ c.name }} : {{ c.balance }} {{ c.currency }}
-</div>
+<mat-accordion class="headers-align">
+  <mat-expansion-panel hideToggle>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <span translate>COMPONENT.ACCOUNTS.ADDNEWACCOUNT</span>
+      </mat-panel-title>
+      <mat-panel-description>
+        <span translate>COMPONENT.ACCOUNTS.ADDNEWACCOUNTDESCRIBED</span>
+        <mat-icon>add</mat-icon>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <mat-form-field>
+      <input
+        matInput
+        [(ngModel)]="new.name"
+        placeholder="{{ 'COMPONENT.ACCOUNTS.NAME' | translate }}"
+      />
+    </mat-form-field>
+
+    <mat-form-field>
+      <input
+        type="number"
+        [(ngModel)]="new.balance"
+        matInput
+        placeholder="{{ 'COMPONENT.ACCOUNTS.BALANCE' | translate }}"
+      />
+    </mat-form-field>
+    <mat-form-field
+      ><mat-select
+        placeholder="{{ 'COMPONENT.ACCOUNTS.CURRENCY' | translate }}"
+        [(ngModel)]="new.currency"
+      >
+        <mat-option
+          *ngFor="let currency of (this.currencyQuery.Currencies$ | async)"
+          value="{{currency.iso_code}}"
+          >{{ currency.iso_code }}</mat-option
+        >
+      </mat-select></mat-form-field
+    >
+    <mat-action-row>
+      <button mat-button color="primary" (click)="create(new)">
+        <span translate>COMPONENT.ACCOUNTS.SAVE</span>
+      </button>
+    </mat-action-row></mat-expansion-panel
+  >
+  <mat-expansion-panel
+    *ngFor="let c of (this.accountQuery.Accounts$ | async)"
+    hideToggle
+  >
+    <mat-expansion-panel-header (click)="opened(c)">
+      <mat-panel-title> {{ c.name }} </mat-panel-title>
+      <mat-panel-description>
+        {{ c.balance }} {{ c.currency }}
+        <mat-icon>edit</mat-icon>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <mat-form-field>
+      <input
+        matInput
+        [(ngModel)]="this.underedit.name"
+        placeholder="{{ 'COMPONENT.ACCOUNTS.NAME' | translate:param }}"
+      />
+    </mat-form-field>
+
+    <mat-form-field>
+      <input
+        type="number"
+        [(ngModel)]="this.underedit.balance"
+        matInput
+        placeholder="{{ 'COMPONENT.ACCOUNTS.BALANCE' | translate:param }}"
+      />
+      <span matSuffix>{{ c.currency }}</span>
+    </mat-form-field>
+    <mat-action-row>
+      <button mat-button color="warn" (click)="delete(c)">
+        <span translate>COMPONENT.ACCOUNTS.DELETE</span>
+      </button>
+      <button mat-button color="primary" (click)="save()">
+        <span translate>COMPONENT.ACCOUNTS.SAVE</span>
+      </button>
+    </mat-action-row></mat-expansion-panel
+  >
+</mat-accordion>

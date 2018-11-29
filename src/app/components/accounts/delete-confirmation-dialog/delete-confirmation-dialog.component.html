@@ -1,0 +1,19 @@
+<h1 mat-dialog-title><span translate>COMPONENT.ACCOUNTS.DELETE</span></h1>
+<div mat-dialog-content>
+  <p><span translate>COMPONENT.ACCOUNTS.DELETEINFO</span></p>
+  <p><span translate>COMPONENT.ACCOUNTS.DELETEINFO2</span></p>
+  <mat-form-field>
+    <input matInput placeholder="{{data.name}}" [(ngModel)]="data.nameConfirmation" />
+    <mat-icon matSuffix>{{
+        data.nameConfirmation==data.name ? "done" : "error"
+    }}</mat-icon>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">
+    <span translate>COMPONENT.ACCOUNTS.CANCEL</span>
+  </button>
+  <button mat-button [mat-dialog-close]="data" color="warn" cdkFocusInitial>
+    <span translate>COMPONENT.ACCOUNTS.DELETE</span>
+  </button>
+</div>

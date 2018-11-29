@@ -31,7 +31,25 @@
     "HOME": {},
     "STATISTICS": {},
     "TRANSACTIONS": {},
-    "ACCOUNTS": {},
+    "ACCOUNTS": {
+      "NAME": "Name of account",
+      "BALANCE":"Balance",
+      "CURRENCY":"Currency",
+      "SAVE": "Save",
+      "DELETE": "Delete account",
+      "CANCEL": "Cancel",
+      "WRONGCONFIRMATION": "Wrong confirmation! Deletion cancelled.",
+      "DELETEINFO": "You will also delete the transactions which are related to this account.",
+      "DELETEINFO2": "To delete it, please type the name of the account!",
+      "ADDNEWACCOUNT": "Add account",
+      "ADDNEWACCOUNTDESCRIBED": "Click here, to add a new account",
+      "ACCOUNTSTATE": {
+        "OK": "Ok!",
+        "ADDEDSUCCESSFULLY": "Account added successfully!",
+        "DELETEDSUCCESSFULLY": "Account deleted successfully!",
+        "EDITEDSUCCESSFULLY": "Account edited successfully!"
+      }
+    },
     "TOOLBAR": {
       "OK":"Ok!",
       "LANGUAGE_SETTINGS_SAVED_ON_DEVICE":"Language settings saved on device!",

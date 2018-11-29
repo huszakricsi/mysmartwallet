@@ -4,6 +4,7 @@ export const environment = {
   api: {
     url: apiurl,
     authEndpoint: apiurl + "auth",
+    currenciesEndpoint: apiurl + "currencies",
     auth: {
       signOutEndpoint: apiurl + "auth/sign_out",
       signInEndpoint: apiurl + "auth/sign_in",
