@@ -10,6 +10,8 @@ export const environment = {
       signInEndpoint: apiurl + "auth/sign_in",
       validateEndpoint: apiurl + "auth/validate_token"
     },
-    accountsEndpoint: apiurl+"accounts"
+    accountsEndpoint: apiurl+"accounts",
+    transactionsEndpoint: apiurl+"transactions",
+    categoriesEndpoint: apiurl+"categories"
   }
 };

@@ -7,7 +7,8 @@ import { Injectable } from "@angular/core";
   providedIn: "root"
 })
 export class AccountQuery extends QueryEntity<AccountState, Account> {  
-  Accounts$ = this.selectAll();
+  public Accounts$ = this.selectAll();
+  public AccountCount$ = this.selectCount();
   constructor(protected store: AccountStore) {
     super(store);
   }

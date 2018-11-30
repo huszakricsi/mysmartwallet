@@ -6,6 +6,8 @@ import { TranslateService } from "@ngx-translate/core";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { AccountService } from "../../accounts/state/account.service";
 import { CurrencyService } from "../../currency/state/currency.service";
+import { TransactionService } from "../../transactions/state/transaction.service";
+import { CategoryService } from "../../categories/state/category.service";
 
 @Component({
   selector: "app-toolbar",
@@ -24,7 +26,9 @@ export class ToolbarComponent implements OnInit {
     private translate: TranslateService,
     private snackBar: MatSnackBar,
     private accountService:AccountService,
-    private currencyService:CurrencyService
+    private currencyService:CurrencyService,
+    private categoryService:CategoryService,
+    private transactionService:TransactionService
   ) {
     this.translate.get("COMPONENT.TOOLBAR.HOME").subscribe((res: string) => {
       this.location.value = res;
@@ -34,6 +38,8 @@ export class ToolbarComponent implements OnInit {
   ngOnInit() {
     this.accountService.fetchAccounts();
     this.currencyService.fetchCurrencies();
+    this.transactionService.fetchTransactions();
+    this.categoryService.fetchCategories();
   }
   public navigate(location: string) {
     this.location.key = location;

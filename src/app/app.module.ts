@@ -31,6 +31,7 @@ import { MatExpansionModule } from "@angular/material/expansion";
 import { MatSelectModule } from "@angular/material/select";
 import { MatDialogModule } from "@angular/material/dialog";
 import { DeleteConfirmationDialogComponent } from "./components/accounts/delete-confirmation-dialog/delete-confirmation-dialog.component";
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
@@ -69,6 +70,7 @@ export function createTranslateLoader(http: HttpClient) {
     AngularWebStorageModule,
     HttpClientModule,
     MatDialogModule,
+    MatPaginatorModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
