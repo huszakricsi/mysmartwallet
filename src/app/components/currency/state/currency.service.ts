@@ -18,7 +18,8 @@ export class CurrencyService {
     private authQuery: AuthQuery,
     private currencyStore: CurrencyStore,
     public snackBar: MatSnackBar,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private authService: AuthService
   ) {}
 
   public fetchCurrencies() {
@@ -34,6 +35,7 @@ export class CurrencyService {
       }
     })
       .then((response: any) => {
+        this.authService.updateHeaders(response.headers);
         this.currencyStore.set(
           response.data.currencies.map(item => createCurrency(item))
         );

@@ -12,6 +12,17 @@ import { TranslateService } from "@ngx-translate/core";
   providedIn: "root"
 })
 export class AuthService {
+  updateHeaders(headers: any): any {
+    const uid = headers["uid"];
+    const client = headers["client"];
+    const accessToken = headers["access-token"];
+    const expiry = headers["expiry"];
+    if (!!uid && !!client && !!accessToken && !!expiry) {
+      this.authStore.update(
+        createAuth({ uid, client, accessToken, expiry, tokenType: "Bearer" })
+      );
+    }
+  }
   constructor(
     private authStore: AuthStore,
     private authQuery: AuthQuery,
@@ -25,19 +36,19 @@ export class AuthService {
         url: environment.api.auth.validateEndpoint,
         method: "GET",
         headers: {
-          'access-token': auth.accessToken,
-          'client': auth.client,
-          'uid': auth.uid,
-          'expiry': auth.expiry,
-          'token-type': 'Bearer'
+          "access-token": auth.accessToken,
+          client: auth.client,
+          uid: auth.uid,
+          expiry: auth.expiry,
+          "token-type": "Bearer"
         }
       })
         .then((response: any) => {
           this.authStore.update(auth);
         })
-        .catch((exception: any)=>{
+        .catch((exception: any) => {
           local.remove("auth");
-        })
+        });
     } catch (e) {}
     authQuery.auth$.subscribe(auth => {
       this.local.set("auth", auth);

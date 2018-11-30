@@ -29,6 +29,7 @@ export class AccountService {
       data: acc
     })
       .then((response: any) => {
+        this.authService.updateHeaders(response.headers);
         this.fetchAccounts();
         if (!!this.snackBar) {
           this.translate
@@ -74,6 +75,7 @@ export class AccountService {
       data: acc
     })
       .then((response: any) => {
+        this.authService.updateHeaders(response.headers);
         this.fetchAccounts();
         if (!!this.snackBar) {
           this.translate
@@ -119,6 +121,7 @@ export class AccountService {
       data: acc
     })
       .then((response: any) => {
+        this.authService.updateHeaders(response.headers);
         this.fetchAccounts();
         if (!!this.snackBar) {
           this.translate
@@ -173,6 +176,7 @@ export class AccountService {
       }
     })
       .then((response: any) => {
+        this.authService.updateHeaders(response.headers);
         this.accountStore.set(
           response.data.accounts.map(item => createAccount(item))
         );
