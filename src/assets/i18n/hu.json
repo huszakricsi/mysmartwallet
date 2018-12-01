@@ -31,6 +31,12 @@
     "HOME": {},
     "STATISTICS": {},
     "TRANSACTIONS": {
+      "LASTFIVE": "Utolsó 5 tranzakció",
+      "COMMENT": "Komment",
+      "DATE": "Időpont",
+      "EDIT": "Szerkesztés",
+      "DELETE": "Tranzakció törlése",
+      "CANCEL": "Mégsem",
       "ACCOUNT": "Fiók",
       "AMOUNT": "Mérték",
       "ADDCOMMENT": "Komment..",

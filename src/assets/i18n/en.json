@@ -31,6 +31,12 @@
     "HOME": {},
     "STATISTICS": {},
     "TRANSACTIONS": {
+      "LASTFIVE": "Last 5 transactions",
+      "COMMENT": "Comment",
+      "DATE": "Date",
+      "EDIT": "Edit",
+      "DELETE": "Delete transaction",
+      "CANCEL": "Cancel",
       "ACCOUNT": "Account",
       "AMOUNT": "Amount",
       "ADDCOMMENT": "Comment..",

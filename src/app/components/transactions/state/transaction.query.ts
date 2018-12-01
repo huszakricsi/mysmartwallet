@@ -12,6 +12,7 @@ import { Injectable } from "@angular/core";
 })
 export class TransactionQuery extends QueryEntity<TransactionState, Transaction> {  
   public Transactions$ = this.selectAll();
+  public TransactionsCount$ = this.selectCount();
   public LastTransactions$ = this.selectAll({limitTo: 5});
   constructor(protected store: TransactionStore) {
     super(store);

@@ -1,0 +1,65 @@
+<h1 mat-dialog-title><span translate>COMPONENT.TRANSACTIONS.EDIT</span></h1>
+<div mat-dialog-content>
+  <mat-form-field class="full-width"
+    ><mat-select
+      placeholder="{{ 'COMPONENT.TRANSACTIONS.ACCOUNT' | translate }}"
+      [(ngModel)]="data.account_id"
+    >
+      <mat-option
+        *ngFor="let account of (this.accountQuery.Accounts$ | async)"
+        [value]="account.id"
+      >
+        {{ account.name }} | {{ account.balance }} {{ account.currency }}
+      </mat-option>
+    </mat-select></mat-form-field
+  >
+  <br />
+  <mat-form-field class="full-width">
+    <input
+      type="number"
+      [(ngModel)]="data.amount"
+      matInput
+      placeholder="{{ 'COMPONENT.TRANSACTIONS.AMOUNT' | translate }}"
+    />
+  </mat-form-field>
+
+  <br />
+  <mat-form-field class="full-width"
+    ><mat-select
+      placeholder="{{ 'COMPONENT.TRANSACTIONS.CATEGORY' | translate }}"
+      [(ngModel)]="data.category_id"
+    >
+      <mat-optgroup
+        *ngFor="let group of (this.categoryQuery.Categories$ | async)"
+        label="{{ 'COMPONENT.TRANSACTIONS.CATEGORIES.'+group.label.toUpperCase() | translate }}"
+      >
+        <mat-option *ngFor="let category of group.childs" [value]="category.id">
+          <span translate
+            >COMPONENT.TRANSACTIONS.CATEGORIES.{{
+              category.label.toUpperCase()
+            }}</span
+          >
+        </mat-option>
+      </mat-optgroup>
+    </mat-select></mat-form-field
+  >
+  <br />
+  <mat-form-field class="full-width">
+    <textarea
+      [(ngModel)]="data.comment"
+      matInput
+      placeholder="{{ 'COMPONENT.TRANSACTIONS.ADDCOMMENT' | translate }}"
+    ></textarea>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">
+    <span translate>COMPONENT.TRANSACTIONS.CANCEL</span>
+  </button>
+  <button mat-button color="warn" (click)="onDeleteClick()">
+    <span translate>COMPONENT.TRANSACTIONS.DELETE</span>
+  </button>
+  <button mat-button (click)="onSaveClick()">
+    <span translate>COMPONENT.TRANSACTIONS.SAVE</span>
+  </button>
+</div>

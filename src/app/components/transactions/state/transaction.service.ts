@@ -15,6 +15,100 @@ import { AccountService } from "../../accounts/state/account.service";
   providedIn: "root"
 })
 export class TransactionService {
+  deleteTransaction(transaction: Transaction): any {
+    axios({
+      url: environment.api.transactionsEndpoint,
+      method: "DELETE",
+      headers: {
+        "access-token": this.authQuery.accessToken,
+        client: this.authQuery.client,
+        uid: this.authQuery.uid,
+        expiry: this.authQuery.expiry,
+        "token-type": "Bearer"
+      },
+      data: transaction
+    })
+      .then((response: any) => {
+        this.authService.updateHeaders(response.headers);
+        this.accountService.fetchAccounts();
+        this.fetchTransactions();
+        if (!!this.snackBar) {
+          this.translate
+            .get("COMPONENT.TRANSACTIONS.TRANSACTIONSSTATE.OK")
+            .subscribe((ok: string) => {
+              this.translate
+                .get("COMPONENT.TRANSACTIONS.TRANSACTIONSSTATE.DELETEDSUCCESSFULLY")
+                .subscribe((msg: string) => {
+                  this.snackBar.open(msg, ok, {
+                    duration: 2000
+                  });
+                });
+            });
+        }
+      })
+      .catch((error: any) => {
+        error.response.data.errors.forEach(
+          function(error) {
+            if (!!this.snackBar) {
+              this.translate
+                .get("COMPONENT.AUTH.AUTHSTATE.OK")
+                .subscribe((ok: string) => {
+                  this.snackBar.open(error, ok, {
+                    duration: 2000
+                  });
+                });
+            }
+          }.bind(this)
+        );
+      });
+  }
+  patchTransaction(transaction: Transaction): any {
+    axios({
+      url: environment.api.transactionsEndpoint,
+      method: "PATCH",
+      headers: {
+        "access-token": this.authQuery.accessToken,
+        client: this.authQuery.client,
+        uid: this.authQuery.uid,
+        expiry: this.authQuery.expiry,
+        "token-type": "Bearer"
+      },
+      data: transaction
+    })
+      .then((response: any) => {
+        this.authService.updateHeaders(response.headers);
+        this.accountService.fetchAccounts();
+        this.fetchTransactions();
+        if (!!this.snackBar) {
+          this.translate
+            .get("COMPONENT.TRANSACTIONS.TRANSACTIONSSTATE.OK")
+            .subscribe((ok: string) => {
+              this.translate
+                .get("COMPONENT.TRANSACTIONS.TRANSACTIONSSTATE.EDITEDSUCCESSFULLY")
+                .subscribe((msg: string) => {
+                  this.snackBar.open(msg, ok, {
+                    duration: 2000
+                  });
+                });
+            });
+        }
+      })
+      .catch((error: any) => {
+        error.response.data.errors.forEach(
+          function(error) {
+            if (!!this.snackBar) {
+              this.translate
+                .get("COMPONENT.AUTH.AUTHSTATE.OK")
+                .subscribe((ok: string) => {
+                  this.snackBar.open(error, ok, {
+                    duration: 2000
+                  });
+                });
+            }
+          }.bind(this)
+        );
+      });
+  }
   createTransaction(transaction: Transaction): any {
     axios({
       url: environment.api.transactionsEndpoint,

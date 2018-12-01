@@ -1,3 +1,159 @@
-<p>
-  home-page works!
-</p>
+<mat-accordion
+  *ngIf="(this.accountQuery.AccountCount$ | async) > 0"
+  class="headers-align"
+>
+  <mat-expansion-panel hideToggle>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <span translate>COMPONENT.TRANSACTIONS.ADDNEWTRANSACTION</span>
+      </mat-panel-title>
+      <mat-panel-description>
+        <span translate>COMPONENT.TRANSACTIONS.ADDNEWTRANSACTIONDESCRIBED</span>
+        <mat-icon>add</mat-icon>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <br />
+    <mat-form-field class="full-width"
+      ><mat-select
+        placeholder="{{ 'COMPONENT.TRANSACTIONS.ACCOUNT' | translate }}"
+        [(ngModel)]="new.account_id"
+      >
+        <mat-option
+          *ngFor="let account of (this.accountQuery.Accounts$ | async)"
+          [value]="account.id"
+        >
+          {{ account.name }} | {{ account.balance }} {{ account.currency }}
+        </mat-option>
+      </mat-select></mat-form-field
+    >
+    <br />
+    <mat-form-field class="full-width">
+      <input
+        type="number"
+        [(ngModel)]="new.amount"
+        matInput
+        placeholder="{{ 'COMPONENT.TRANSACTIONS.AMOUNT' | translate }}"
+      />
+    </mat-form-field>
+
+    <br />
+    <mat-form-field class="full-width"
+      ><mat-select
+        placeholder="{{ 'COMPONENT.TRANSACTIONS.CATEGORY' | translate }}"
+        [(ngModel)]="new.category_id"
+      >
+        <mat-optgroup
+          *ngFor="let group of (this.categoryQuery.Categories$ | async)"
+          label="{{ 'COMPONENT.TRANSACTIONS.CATEGORIES.'+group.label.toUpperCase() | translate }}"
+        >
+          <mat-option
+            *ngFor="let category of group.childs"
+            [value]="category.id"
+          >
+            <span translate
+              >COMPONENT.TRANSACTIONS.CATEGORIES.{{
+                category.label.toUpperCase()
+              }}</span
+            >
+          </mat-option>
+        </mat-optgroup>
+      </mat-select></mat-form-field
+    >
+    <br />
+    <mat-form-field class="full-width">
+      <textarea
+        [(ngModel)]="new.comment"
+        matInput
+        placeholder="{{ 'COMPONENT.TRANSACTIONS.ADDCOMMENT' | translate }}"
+      ></textarea>
+    </mat-form-field>
+    <mat-action-row>
+      <mat-card
+        *ngIf="!(!!new.account_id && !!new.category_id)"
+        class="centertext"
+        warn
+        ><span translate>COMPONENT.TRANSACTIONS.EMPTY_FIELD</span></mat-card
+      ><button
+        *ngIf="!!new.account_id && !!new.category_id"
+        mat-button
+        color="primary"
+        (click)="createTransaction(new)"
+      >
+        <span translate>COMPONENT.TRANSACTIONS.SAVE</span>
+      </button>
+    </mat-action-row></mat-expansion-panel
+  >
+  <mat-card
+    *ngIf="(this.accountQuery.AccountCount$ | async) == 0"
+    class="centertext"
+    ><span translate>COMPONENT.TRANSACTIONS.NOT_ALLOWED</span></mat-card
+  >
+  <mat-divider></mat-divider>
+  <mat-card class="centertext"
+    ><mat-card-title
+      ><span translate>COMPONENT.TRANSACTIONS.LASTFIVE</span></mat-card-title
+    ><mat-card-content>
+      <mat-table [dataSource]="this.transactionQuery.LastTransactions$ | async">
+        <ng-container matColumnDef="account_id">
+          <mat-header-cell *matHeaderCellDef>
+            <span translate> COMPONENT.TRANSACTIONS.ACCOUNT </span>
+          </mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            {{ (this.accountQuery.selectEntity(row.account_id) | async)?.name }}
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="category_id">
+          <mat-header-cell *matHeaderCellDef>
+            <span translate> COMPONENT.TRANSACTIONS.CATEGORY </span>
+          </mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            <span translate>
+              COMPONENT.TRANSACTIONS.CATEGORIES.{{
+                this.categoryQuery.childs[row.category_id]?this.categoryQuery.childs[row.category_id].toUpperCase():"PLEASEWAIT"
+              }}
+            </span>
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="amount">
+          <mat-header-cell *matHeaderCellDef>
+            <span translate> COMPONENT.TRANSACTIONS.AMOUNT </span>
+          </mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            {{ row.amount }}
+            {{
+              (this.accountQuery.selectEntity(row.account_id) | async)?.currency
+            }}
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="comment">
+          <mat-header-cell *matHeaderCellDef>
+            <span translate> COMPONENT.TRANSACTIONS.COMMENT </span>
+          </mat-header-cell>
+          <mat-cell *matCellDef="let row"> {{ row.comment }} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="created_at">
+          <mat-header-cell *matHeaderCellDef>
+            <span translate> COMPONENT.TRANSACTIONS.DATE </span>
+          </mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            {{ formatDate(row.created_at) }}
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="edit">
+          <mat-header-cell *matHeaderCellDef>
+            <span translate> COMPONENT.TRANSACTIONS.EDIT </span>
+          </mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            <button mat-button (click)="editTransaction(row)">
+              <mat-icon>edit</mat-icon>
+            </button></mat-cell
+          >
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+      </mat-table> </mat-card-content
+  ></mat-card>
+  <!-- !!! -->
+</mat-accordion>

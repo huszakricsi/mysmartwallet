@@ -36,10 +36,10 @@ export class ToolbarComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.categoryService.fetchCategories();
     this.accountService.fetchAccounts();
     this.currencyService.fetchCurrencies();
     this.transactionService.fetchTransactions();
-    this.categoryService.fetchCategories();
   }
   public navigate(location: string) {
     this.location.key = location;

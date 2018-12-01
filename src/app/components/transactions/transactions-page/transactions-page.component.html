@@ -63,6 +63,7 @@
     <br />
     <mat-form-field class="full-width">
       <textarea
+        [(ngModel)]="new.comment"
         matInput
         placeholder="{{ 'COMPONENT.TRANSACTIONS.ADDCOMMENT' | translate }}"
       ></textarea>
@@ -77,7 +78,7 @@
         *ngIf="!!new.account_id && !!new.category_id"
         mat-button
         color="primary"
-        (click)="create(new)"
+        (click)="createTransaction(new)"
       >
         <span translate>COMPONENT.TRANSACTIONS.SAVE</span>
       </button>
@@ -89,21 +90,79 @@
     ><span translate>COMPONENT.TRANSACTIONS.NOT_ALLOWED</span></mat-card
   >
 
+  <mat-divider></mat-divider>
   <!-- !!! -->
 
-  <mat-card
-    *ngFor="let transaction of (this.transactionQuery.Transactions$ | async)"
+  <mat-table
+    [dataSource]="
+      (this.transactionQuery.Transactions$ | async).slice(
+        pageEvent.pageIndex * pageEvent.pageSize,
+        (pageEvent.pageIndex + 1) * pageEvent.pageSize
+      )
+    "
   >
-    <mat-card-header>
-      <mat-card-title
-        ><span translate>COMPONENT.TRANSACTIONS.CATEGORIES.{{this.categoryQuery.childs[transaction.category_id].toUpperCase()}}</span> | {{transaction.amount}} {{(this.accountQuery.selectEntity(transaction.account_id) | async)?.currency}}</mat-card-title
+    <ng-container matColumnDef="account_id">
+      <mat-header-cell *matHeaderCellDef>
+        <span translate> COMPONENT.TRANSACTIONS.ACCOUNT </span>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        {{ (this.accountQuery.selectEntity(row.account_id) | async)?.name }}
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="category_id">
+      <mat-header-cell *matHeaderCellDef>
+        <span translate> COMPONENT.TRANSACTIONS.CATEGORY </span>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <span translate>
+          COMPONENT.TRANSACTIONS.CATEGORIES.{{
+            this.categoryQuery.childs[row.category_id]?.toUpperCase()
+          }}
+        </span>
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="amount">
+      <mat-header-cell *matHeaderCellDef>
+        <span translate> COMPONENT.TRANSACTIONS.AMOUNT </span>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        {{ row.amount }}
+        {{ (this.accountQuery.selectEntity(row.account_id) | async)?.currency }}
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="comment">
+      <mat-header-cell *matHeaderCellDef>
+        <span translate> COMPONENT.TRANSACTIONS.COMMENT </span>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{ row.comment }} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="created_at">
+      <mat-header-cell *matHeaderCellDef>
+        <span translate> COMPONENT.TRANSACTIONS.DATE </span>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        {{ formatDate(row.created_at) }}
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="edit">
+      <mat-header-cell *matHeaderCellDef>
+        <span translate> COMPONENT.TRANSACTIONS.EDIT </span>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <button mat-button (click)="editTransaction(row)">
+          <mat-icon>edit</mat-icon>
+        </button></mat-cell
       >
-      <mat-card-subtitle>{{(this.accountQuery.selectEntity(transaction.account_id) | async)?.name}} | {{(this.accountQuery.selectEntity(transaction.account_id) | async)?.balance}} {{(this.accountQuery.selectEntity(transaction.account_id) | async)?.currency}}</mat-card-subtitle>
-    </mat-card-header>
-    <mat-card-actions>
-      <button mat-button><mat-icon>delete</mat-icon></button>
-      <button mat-button><mat-icon>edit</mat-icon></button>
-      <button mat-button><mat-icon>info</mat-icon></button>
-    </mat-card-actions>
-  </mat-card>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+  </mat-table>
+  <mat-paginator
+    [length]="this.transactionQuery.TransactionsCount$ | async"
+    [pageSize]="pageSize"
+    (page)="this.pageEvent = $event"
+    [pageSizeOptions]="[5, 10, 25, 50]"
+  >
+  </mat-paginator>
 </mat-accordion>

@@ -31,7 +31,9 @@ import { MatExpansionModule } from "@angular/material/expansion";
 import { MatSelectModule } from "@angular/material/select";
 import { MatDialogModule } from "@angular/material/dialog";
 import { DeleteConfirmationDialogComponent } from "./components/accounts/delete-confirmation-dialog/delete-confirmation-dialog.component";
-import {MatPaginatorModule} from '@angular/material/paginator';
+import { MatPaginatorModule } from "@angular/material/paginator";
+import { MatTableModule } from "@angular/material/table";
+import { EditDialogComponent } from "./components/transactions/edit-dialog/edit-dialog.component";
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
@@ -46,7 +48,8 @@ export function createTranslateLoader(http: HttpClient) {
     StatisticsPageComponent,
     TransactionsPageComponent,
     AccountsPageComponent,
-    DeleteConfirmationDialogComponent
+    DeleteConfirmationDialogComponent,
+    EditDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -71,6 +74,7 @@ export function createTranslateLoader(http: HttpClient) {
     HttpClientModule,
     MatDialogModule,
     MatPaginatorModule,
+    MatTableModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -81,6 +85,6 @@ export function createTranslateLoader(http: HttpClient) {
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [DeleteConfirmationDialogComponent]
+  entryComponents: [DeleteConfirmationDialogComponent, EditDialogComponent]
 })
 export class AppModule {}
