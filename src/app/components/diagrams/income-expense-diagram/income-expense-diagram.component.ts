@@ -137,7 +137,6 @@ export class IncomeExpenseDiagramComponent implements OnInit {
     }
   ];
 
-  view: any[] = [700, 400];
 
   // options
   showXAxis = true;
@@ -145,10 +144,10 @@ export class IncomeExpenseDiagramComponent implements OnInit {
   gradient = false;
   showLegend = false;
   showXAxisLabel = true;
-  xAxisLabel = "Month";
+  xAxisLabel = "";
   showYAxisLabel = true;
   yAxisLabel = "";
-  legendTitle = "Type";
+  legendTitle = "";
 
   colorScheme = {
     domain: ["#5AA454", "#A10A28", "#C7B42C", "#AAAAAA"]

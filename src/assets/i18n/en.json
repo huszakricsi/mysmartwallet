@@ -2,6 +2,7 @@
   "LANGUAGE_SET": "Language set to english.({{value}})",
   "INCOME": "Income",
   "EXPENSE": "Expense",
+  "DATE": "Date",
   "MONTHS":{
     "MONTH": "Month",
     "0": "January",

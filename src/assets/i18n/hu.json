@@ -2,6 +2,7 @@
   "LANGUAGE_SET": "Magyar nyelv lett beállítva.({{value}})",
   "INCOME": "Bevétel",
   "EXPENSE": "Költség",
+  "DATE": "Dátum",
   "MONTHS": {
     "MONTH": "Hónap",
     "0":	"Január",
