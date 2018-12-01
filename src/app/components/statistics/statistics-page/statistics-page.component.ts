@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AccountQuery } from '../../accounts/state/account.query';
 
 @Component({
   selector: 'app-statistics-page',
@@ -7,7 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StatisticsPageComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    public accountQuery: AccountQuery) { }
 
   ngOnInit() {
   }

@@ -1,3 +1,3 @@
-<p>
-  statistics-page works!
-</p>
+<div *ngFor="let account of (this.accountQuery.Accounts$ | async)">
+  <app-income-expense-diagram [account]="account"></app-income-expense-diagram>
+</div>

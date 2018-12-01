@@ -26,6 +26,7 @@
     "@datorama/akita": "^1.21.0",
     "@ngx-translate/core": "^11.0.1",
     "@ngx-translate/http-loader": "^4.0.0",
+    "@swimlane/ngx-charts": "^10.0.0",
     "angular-particle": "^1.0.4",
     "angular-web-storage": "^4.1.0",
     "axios": "^0.18.0",

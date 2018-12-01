@@ -7,6 +7,7 @@ export interface Transaction {
   account_id: ID;
   category_id: ID;
   created_at: Date;
+  isIncome: boolean;
 }
 export function createTransaction({
   id = null,
@@ -14,7 +15,8 @@ export function createTransaction({
   comment = "",
   account_id = null,
   category_id = null,
-  created_at = Date.now()
+  created_at = Date.now(),
+  isIncome = false
 }: Partial<Transaction>) {
   return {
   id,
@@ -22,6 +24,7 @@ export function createTransaction({
   comment,
   account_id,
   category_id,
-  created_at
+  created_at,
+  isIncome
   };
 }

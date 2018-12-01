@@ -2,6 +2,26 @@
   *ngIf="(this.accountQuery.AccountCount$ | async) > 0"
   class="headers-align"
 >
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title
+        ><span translate>COMPONENT.HOME.ACCOUNTS</span></mat-card-title
+      >
+    </mat-card-header>
+  </mat-card>
+  <mat-grid-list cols="4" rowHeight="75px">
+    <mat-grid-tile
+      *ngFor="let account of (this.accountQuery.Accounts$ | async)"
+      [colspan]="1"
+      [rowspan]="1"
+    >
+      <mat-card
+        >{{ account.name }} | {{ account.balance }}
+        {{ account.currency }}</mat-card
+      >
+    </mat-grid-tile>
+  </mat-grid-list>
+  <mat-divider></mat-divider>
   <mat-expansion-panel hideToggle>
     <mat-expansion-panel-header>
       <mat-panel-title>
@@ -110,7 +130,9 @@
           <mat-cell *matCellDef="let row">
             <span translate>
               COMPONENT.TRANSACTIONS.CATEGORIES.{{
-                this.categoryQuery.childs[row.category_id]?this.categoryQuery.childs[row.category_id].toUpperCase():"PLEASEWAIT"
+                this.categoryQuery.childs[row.category_id]
+                  ? this.categoryQuery.childs[row.category_id].toUpperCase()
+                  : "PLEASEWAIT"
               }}
             </span>
           </mat-cell>
@@ -155,5 +177,4 @@
         <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
       </mat-table> </mat-card-content
   ></mat-card>
-  <!-- !!! -->
 </mat-accordion>

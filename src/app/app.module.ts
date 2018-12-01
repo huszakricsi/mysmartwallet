@@ -34,6 +34,10 @@ import { DeleteConfirmationDialogComponent } from "./components/accounts/delete-
 import { MatPaginatorModule } from "@angular/material/paginator";
 import { MatTableModule } from "@angular/material/table";
 import { EditDialogComponent } from "./components/transactions/edit-dialog/edit-dialog.component";
+import {MatGridListModule} from '@angular/material/grid-list';
+import {NgxChartsModule} from '@swimlane/ngx-charts';
+import { IncomeExpenseDiagramComponent } from './components/diagrams/income-expense-diagram/income-expense-diagram.component';
+import { BalanceDiagramComponent } from './components/diagrams/balance-diagram/balance-diagram.component';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
@@ -49,7 +53,9 @@ export function createTranslateLoader(http: HttpClient) {
     TransactionsPageComponent,
     AccountsPageComponent,
     DeleteConfirmationDialogComponent,
-    EditDialogComponent
+    EditDialogComponent,
+    IncomeExpenseDiagramComponent,
+    BalanceDiagramComponent
   ],
   imports: [
     BrowserModule,
@@ -75,6 +81,8 @@ export function createTranslateLoader(http: HttpClient) {
     MatDialogModule,
     MatPaginatorModule,
     MatTableModule,
+    MatGridListModule,
+    NgxChartsModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

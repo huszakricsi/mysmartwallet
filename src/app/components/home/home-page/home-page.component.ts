@@ -7,7 +7,8 @@ import { CategoryQuery } from "../../categories/state/category.query";
 import { TransactionService } from "../../transactions/state/transaction.service";
 import { TransactionQuery } from "../../transactions/state/transaction.query";
 import { Transaction, createTransaction } from "../../transactions/state/transaction.model";
-import { EditDialogComponent } from "../../transactions/edit-dialog/edit-dialog.component";
+import { EditDialogComponent } from "../../transactions/edit-dialog/edit-dialog.component"
+import {NgxChartsModule} from '@swimlane/ngx-charts';
 
 @Component({
   selector: "app-home-page",
