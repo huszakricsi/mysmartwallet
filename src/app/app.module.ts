@@ -38,6 +38,7 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
 import { IncomeExpenseDiagramComponent } from './components/diagrams/income-expense-diagram/income-expense-diagram.component';
 import { BalanceDiagramComponent } from './components/diagrams/balance-diagram/balance-diagram.component';
+import { ExpenseDispersionDiagramComponent } from './components/diagrams/expense-dispersion-diagram/expense-dispersion-diagram.component';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
@@ -55,7 +56,8 @@ export function createTranslateLoader(http: HttpClient) {
     DeleteConfirmationDialogComponent,
     EditDialogComponent,
     IncomeExpenseDiagramComponent,
-    BalanceDiagramComponent
+    BalanceDiagramComponent,
+    ExpenseDispersionDiagramComponent
   ],
   imports: [
     BrowserModule,

@@ -29,7 +29,6 @@ export class BalanceDiagramComponent implements OnInit {
       .subscribe(entities => {
         let val = this.account.balance.valueOf();
         for (let entity of entities) {
-          console.log(entity);
           this.content[0].series.unshift({name: this.formatDate(entity.created_at.toString()), value: val})
           if (entity.isIncome) {
             val -= entity.amount;
@@ -86,6 +85,5 @@ export class BalanceDiagramComponent implements OnInit {
   ) {}
 
   onSelect(event) {
-    console.log(event);
   }
 }

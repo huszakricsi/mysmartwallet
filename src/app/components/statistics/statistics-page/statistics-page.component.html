@@ -1,4 +1,5 @@
 <div *ngFor="let account of (this.accountQuery.Accounts$ | async)">
   <app-income-expense-diagram [account]="account"></app-income-expense-diagram>
   <app-balance-diagram [account]="account"></app-balance-diagram>
+  <app-expense-dispersion-diagram [account]="account"></app-expense-dispersion-diagram>
 </div>

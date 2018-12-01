@@ -45,14 +45,14 @@
       >
         <mat-optgroup
           *ngFor="let group of (this.categoryQuery.Categories$ | async)"
-          label="{{ 'COMPONENT.TRANSACTIONS.CATEGORIES.'+group.label.toUpperCase() | translate }}"
+          label="{{ 'CATEGORIES.'+group.label.toUpperCase() | translate }}"
         >
           <mat-option
             *ngFor="let category of group.childs"
             [value]="category.id"
           >
             <span translate
-              >COMPONENT.TRANSACTIONS.CATEGORIES.{{
+              >CATEGORIES.{{
                 category.label.toUpperCase()
               }}</span
             >
@@ -115,7 +115,7 @@
       </mat-header-cell>
       <mat-cell *matCellDef="let row">
         <span translate>
-          COMPONENT.TRANSACTIONS.CATEGORIES.{{
+          CATEGORIES.{{
             this.categoryQuery.childs[row.category_id]?.toUpperCase()
           }}
         </span>

@@ -160,6 +160,5 @@ export class IncomeExpenseDiagramComponent implements OnInit {
   ) {}
 
   onSelect(event) {
-    console.log(event);
   }
 }
