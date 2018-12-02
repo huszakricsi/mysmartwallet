@@ -12,11 +12,11 @@ import { CategoryQuery } from "../../categories/state/category.query";
 export class ExpenseDispersionDiagramComponent implements OnInit {
   ngOnInit() {
     let d = new Date();
-    d.setMonth(d.getMonth() - 3);
+    d.setMonth(d.getMonth() - this.month_back);
     this.transactionQuery
       .selectAll({
         filterBy: entity =>
-          new Date(entity.created_at) >= d &&
+          (new Date(entity.created_at)).getMonth() == d.getMonth() &&
           entity.account_id == this.account.id
       })
       .subscribe(entities => {
@@ -43,6 +43,7 @@ export class ExpenseDispersionDiagramComponent implements OnInit {
       });
   }
   @Input() account: Account;
+  @Input() month_back: number;
 
   content = [];
 
@@ -52,10 +53,6 @@ export class ExpenseDispersionDiagramComponent implements OnInit {
   showLegend = false;
   showLabels = true;
   legendTitle = "";
-
-  colorScheme = {
-    domain: ["#5AA454", "#A10A28", "#C7B42C", "#AAAAAA"]
-  };
 
   constructor(
     public translate: TranslateService,
