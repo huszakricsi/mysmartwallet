@@ -26,6 +26,11 @@ export class IncomeExpenseDiagramComponent implements OnInit {
       this.content[1].series[1].name = msg;
       this.content[2].series[1].name = msg;
     });
+    this.translate.get("SAVING").subscribe((msg: string) => {
+      this.content[0].series[2].name = msg;
+      this.content[1].series[2].name = msg;
+      this.content[2].series[2].name = msg;
+    });
     this.translate.get("MONTHS.MONTH").subscribe((msg: string) => {
       this.xAxisLabel = msg;
     });
@@ -65,8 +70,10 @@ export class IncomeExpenseDiagramComponent implements OnInit {
               entity.isIncome
             ) {
               this.content[2].series[0].value += entity.amount;
+              this.content[2].series[2].value += entity.amount;
             } else {
               this.content[2].series[1].value += entity.amount;
+              this.content[2].series[2].value -= entity.amount;
             }
           } else if (
             new Date(entity.created_at).getMonth() == MonthBefore.getMonth()
@@ -76,15 +83,19 @@ export class IncomeExpenseDiagramComponent implements OnInit {
               )
             {
               this.content[1].series[0].value += entity.amount;
+              this.content[1].series[2].value += entity.amount;
             } else {
               this.content[1].series[1].value += entity.amount;
+              this.content[1].series[2].value -= entity.amount;
             }
           } else {
             if (entity.isIncome)
              {
               this.content[0].series[0].value += entity.amount;
+              this.content[0].series[2].value += entity.amount;
             } else {
               this.content[0].series[1].value += entity.amount;
+              this.content[0].series[2].value -= entity.amount;
             }
           }
         }
@@ -104,6 +115,10 @@ export class IncomeExpenseDiagramComponent implements OnInit {
         {
           name: "expense",
           value: 0
+        },
+        {
+          name: "savings",
+          value: 0
         }
       ]
     },
@@ -118,6 +133,10 @@ export class IncomeExpenseDiagramComponent implements OnInit {
         {
           name: "expense",
           value: 0
+        },
+        {
+          name: "savings",
+          value: 0
         }
       ]
     },
@@ -131,6 +150,10 @@ export class IncomeExpenseDiagramComponent implements OnInit {
         },
         {
           name: "expense",
+          value: 0
+        },
+        {
+          name: "savings",
           value: 0
         }
       ]
