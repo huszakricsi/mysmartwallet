@@ -1,5 +1,5 @@
-import { Component, OnInit, Input } from "@angular/core";
-import { NgxChartsModule } from "@swimlane/ngx-charts";
+import { Component, OnInit, Input, ViewChild, OnChanges } from "@angular/core";
+import { NgxChartsModule, BarVertical2DComponent } from "@swimlane/ngx-charts";
 import { Account } from "../../accounts/state/account.model";
 import { TranslateService } from "@ngx-translate/core";
 import { TransactionService } from "../../transactions/state/transaction.service";
@@ -11,52 +11,21 @@ import { CategoryQuery } from "../../categories/state/category.query";
   templateUrl: "./income-expense-diagram.component.html",
   styleUrls: ["./income-expense-diagram.component.css"]
 })
-export class IncomeExpenseDiagramComponent implements OnInit {
-  ngOnInit() {
+export class IncomeExpenseDiagramComponent implements OnInit, OnChanges {
+  ngOnInit(): void {
+    this.ngOnChanges();
+  }
+  ngOnChanges():void {
     this.translate.get("COMPONENT.ACCOUNTS.NAME").subscribe((msg: string) => {
       this.yAxisLabel = msg + ": " + this.account.name;
-    });
-    this.translate.get("INCOME").subscribe((msg: string) => {
-      this.content[0].series[0].name = msg;
-      this.content[1].series[0].name = msg;
-      this.content[2].series[0].name = msg;
-    });
-    this.translate.get("EXPENSE").subscribe((msg: string) => {
-      this.content[0].series[1].name = msg;
-      this.content[1].series[1].name = msg;
-      this.content[2].series[1].name = msg;
-    });
-    this.translate.get("SAVING").subscribe((msg: string) => {
-      this.content[0].series[2].name = msg;
-      this.content[1].series[2].name = msg;
-      this.content[2].series[2].name = msg;
     });
     this.translate.get("MONTHS.MONTH").subscribe((msg: string) => {
       this.xAxisLabel = msg;
     });
-
-    let CurrentMonth = new Date();
-    this.translate
-      .get("MONTHS." + CurrentMonth.getMonth())
-      .subscribe((msg: string) => {
-        this.content[2].name = msg;
-      });
-    let MonthBefore = new Date();
-    MonthBefore.setMonth(CurrentMonth.getMonth() - 1);
-    this.translate
-      .get("MONTHS." + MonthBefore.getMonth())
-      .subscribe((msg: string) => {
-        this.content[1].name = msg;
-      });
-    let MonthBeforePrevious = new Date();
-    MonthBeforePrevious.setMonth(MonthBefore.getMonth() - 1);
-    this.translate
-      .get("MONTHS." + MonthBeforePrevious.getMonth())
-      .subscribe((msg: string) => {
-        this.content[0].name = msg;
-      });
     let d = new Date();
-    d.setMonth(d.getMonth() - 3);
+    d.setMonth(d.getMonth() - this.months_back);
+    d.setDate(1)
+    d.setHours(0,0,0,0);
     this.transactionQuery
       .selectAll({
         filterBy: entity =>
@@ -64,102 +33,55 @@ export class IncomeExpenseDiagramComponent implements OnInit {
           entity.account_id == this.account.id
       })
       .subscribe(entities => {
-        for (let entity of entities) {
-          if (new Date(entity.created_at).getMonth() == CurrentMonth.getMonth()) {
-            if (
-              entity.isIncome
-            ) {
-              this.content[2].series[0].value += entity.amount;
-              this.content[2].series[2].value += entity.amount;
-            } else {
-              this.content[2].series[1].value += entity.amount;
-              this.content[2].series[2].value -= entity.amount;
-            }
-          } else if (
-            new Date(entity.created_at).getMonth() == MonthBefore.getMonth()
-          ) {
-            if (
-              entity.isIncome
-              )
-            {
-              this.content[1].series[0].value += entity.amount;
-              this.content[1].series[2].value += entity.amount;
-            } else {
-              this.content[1].series[1].value += entity.amount;
-              this.content[1].series[2].value -= entity.amount;
-            }
-          } else {
-            if (entity.isIncome)
-             {
-              this.content[0].series[0].value += entity.amount;
-              this.content[0].series[2].value += entity.amount;
-            } else {
-              this.content[0].series[1].value += entity.amount;
-              this.content[0].series[2].value -= entity.amount;
+        let month = new Date();
+        this.content = [];
+        for (let current_ = 0; current_ <= this.months_back; current_++) {
+          this.content.unshift({
+            name: "",
+            series: [
+              { name: "", value: 0 },
+              { name: "", value: 0 },
+              { name: "", value: 0 }
+            ]
+          });
+          this.translate.get("INCOME").subscribe((msg: string) => {
+            this.content[0].series[0].name = msg;
+          });
+          this.translate.get("EXPENSE").subscribe((msg: string) => {
+            this.content[0].series[1].name = msg;
+          });
+          this.translate.get("SAVING").subscribe((msg: string) => {
+            this.content[0].series[2].name = msg;
+          });
+
+          this.translate
+            .get("MONTHS." + month.getMonth())
+            .subscribe((msg: string) => {
+              this.content[0].name = msg;
+            });
+          for (let entity of entities) {
+            if (new Date(entity.created_at).getMonth() == month.getMonth()) {
+              if (entity.isIncome) {
+                this.content[0].series[0].value += entity.amount;
+                this.content[0].series[2].value += entity.amount;
+              } else {
+                this.content[0].series[1].value += entity.amount;
+                this.content[0].series[2].value -= entity.amount;
+              }
             }
           }
+          month.setMonth(month.getMonth() - 1);
         }
+        this._chart.results = this.content;
+        this._chart.update();
       });
   }
 
+  @Input() months_back: number;
   @Input() account: Account;
 
-  content = [
-    {
-      name: "1",
-      series: [
-        {
-          name: "income",
-          value: 0
-        },
-        {
-          name: "expense",
-          value: 0
-        },
-        {
-          name: "savings",
-          value: 0
-        }
-      ]
-    },
-
-    {
-      name: "2",
-      series: [
-        {
-          name: "income",
-          value: 0
-        },
-        {
-          name: "expense",
-          value: 0
-        },
-        {
-          name: "savings",
-          value: 0
-        }
-      ]
-    },
-
-    {
-      name: "3",
-      series: [
-        {
-          name: "income",
-          value: 0
-        },
-        {
-          name: "expense",
-          value: 0
-        },
-        {
-          name: "savings",
-          value: 0
-        }
-      ]
-    }
-  ];
-
+  @ViewChild(BarVertical2DComponent) private _chart;
+  content = [];
 
   // options
   showXAxis = true;
@@ -182,6 +104,5 @@ export class IncomeExpenseDiagramComponent implements OnInit {
     public categoryQuery: CategoryQuery
   ) {}
 
-  onSelect(event) {
-  }
+  onSelect(event) {}
 }

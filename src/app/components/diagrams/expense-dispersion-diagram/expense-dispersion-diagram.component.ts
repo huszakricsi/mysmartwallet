@@ -12,7 +12,7 @@ import { CategoryQuery } from "../../categories/state/category.query";
 export class ExpenseDispersionDiagramComponent implements OnInit {
   ngOnInit() {
     let d = new Date();
-    d.setMonth(d.getMonth() - this.month_back);
+    d.setMonth(d.getMonth() - this.months_back);
     this.transactionQuery
       .selectAll({
         filterBy: entity =>
@@ -43,7 +43,7 @@ export class ExpenseDispersionDiagramComponent implements OnInit {
       });
   }
   @Input() account: Account;
-  @Input() month_back: number;
+  @Input() months_back: number;
 
   content = [];
 

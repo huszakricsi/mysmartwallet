@@ -1,7 +1,29 @@
+<mat-card>
+  <mat-card-title><span translate>OVERVIEWEDMONTHS</span></mat-card-title>
+  <mat-select
+    placeholder="{{ 'OVERVIEWEDMONTHS' | translate }}"
+    [(ngModel)]="selected"
+  >
+    <mat-option *ngFor="let num of nums" [value]="num"> {{ num }} </mat-option>
+  </mat-select>
+</mat-card>
 <div *ngFor="let account of (this.accountQuery.Accounts$ | async)">
-  <app-income-expense-diagram [account]="account"></app-income-expense-diagram>
-  <app-balance-diagram [account]="account"></app-balance-diagram>
-  <app-expense-dispersion-diagram [month_back]="0" [account]="account"></app-expense-dispersion-diagram>
-  <app-expense-dispersion-diagram [month_back]="1" [account]="account"></app-expense-dispersion-diagram>
-  <app-expense-dispersion-diagram [month_back]="2" [account]="account"></app-expense-dispersion-diagram>
+  <div>
+    <app-income-expense-diagram
+      [months_back]="selected - 1"
+      [account]="account"
+    ></app-income-expense-diagram>
+  </div>
+  <div>
+    <app-balance-diagram
+      [months_back]="selected - 1"
+      [account]="account"
+    ></app-balance-diagram>
+  </div>
+  <div *ngFor="let current of array(selected); let i = index">
+    <app-expense-dispersion-diagram
+      [months_back]="i"
+      [account]="account"
+    ></app-expense-dispersion-diagram>
+  </div>
 </div>
