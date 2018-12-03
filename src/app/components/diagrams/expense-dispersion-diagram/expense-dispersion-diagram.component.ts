@@ -1,16 +1,20 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, OnChanges, ViewChild } from "@angular/core";
 import { Account } from "../../accounts/state/account.model";
 import { TranslateService } from "@ngx-translate/core";
 import { TransactionQuery } from "../../transactions/state/transaction.query";
 import { CategoryQuery } from "../../categories/state/category.query";
+import { PieChartComponent } from "@swimlane/ngx-charts";
 
 @Component({
   selector: "app-expense-dispersion-diagram",
   templateUrl: "./expense-dispersion-diagram.component.html",
   styleUrls: ["./expense-dispersion-diagram.component.css"]
 })
-export class ExpenseDispersionDiagramComponent implements OnInit {
-  ngOnInit() {
+export class ExpenseDispersionDiagramComponent implements OnChanges ,OnInit {
+  ngOnInit(): void {
+    this.ngOnChanges();
+  }
+  ngOnChanges() {
     let d = new Date();
     d.setMonth(d.getMonth() - this.months_back);
     this.transactionQuery
@@ -40,11 +44,16 @@ export class ExpenseDispersionDiagramComponent implements OnInit {
             pie.name = msg;
           });
         }
+        this._chart.results = this.content;
+        this._chart.view=[(window.innerWidth/10)*9,(window.innerHeight/3)*2];
+        this._chart.update();
       });
   }
   @Input() account: Account;
   @Input() months_back: number;
 
+  @ViewChild(PieChartComponent) private _chart;
+  
   content = [];
 
 

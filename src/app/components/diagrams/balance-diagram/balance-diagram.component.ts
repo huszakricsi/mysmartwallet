@@ -15,9 +15,6 @@ export class BalanceDiagramComponent implements OnInit, OnChanges {
     this.ngOnChanges()
   }
   ngOnChanges() {
-    this.translate.get("COMPONENT.ACCOUNTS.NAME").subscribe((msg: string) => {
-      this.yAxisLabel = msg + ": " + this.account.name;
-    });
     this.translate.get("DATE").subscribe((msg: string) => {
       this.xAxisLabel = msg;
     });
@@ -50,6 +47,7 @@ export class BalanceDiagramComponent implements OnInit, OnChanges {
           }
         }
         this._chart.results = this.content;
+        this._chart.view=[(window.innerWidth/10)*9,(window.innerHeight/3)*2];
         this._chart.update();
       });
   }
@@ -81,7 +79,7 @@ export class BalanceDiagramComponent implements OnInit, OnChanges {
 
   // options
   showXAxis = true;
-  showYAxis = true;
+  showYAxis = false;
   gradient = false;
   showLegend = false;
   showXAxisLabel = true;

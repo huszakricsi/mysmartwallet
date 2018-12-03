@@ -16,9 +16,6 @@ export class IncomeExpenseDiagramComponent implements OnInit, OnChanges {
     this.ngOnChanges();
   }
   ngOnChanges():void {
-    this.translate.get("COMPONENT.ACCOUNTS.NAME").subscribe((msg: string) => {
-      this.yAxisLabel = msg + ": " + this.account.name;
-    });
     this.translate.get("MONTHS.MONTH").subscribe((msg: string) => {
       this.xAxisLabel = msg;
     });
@@ -73,6 +70,7 @@ export class IncomeExpenseDiagramComponent implements OnInit, OnChanges {
           month.setMonth(month.getMonth() - 1);
         }
         this._chart.results = this.content;
+        this._chart.view=[(window.innerWidth/10)*9,(window.innerHeight/3)*2];
         this._chart.update();
       });
   }
@@ -85,9 +83,9 @@ export class IncomeExpenseDiagramComponent implements OnInit, OnChanges {
 
   // options
   showXAxis = true;
-  showYAxis = true;
+  showYAxis = false;
   gradient = false;
-  showLegend = false;
+  showLegend = true;
   showXAxisLabel = true;
   xAxisLabel = "";
   showYAxisLabel = true;
