@@ -12,7 +12,6 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatIconModule } from "@angular/material/icon";
 import { MatInputModule } from "@angular/material/input";
 import { FormsModule } from "@angular/forms";
-import { ParticlesModule } from "angular-particle";
 import { AppRoutingModule } from "./routing/app-routing.module";
 import { HomePageComponent } from "./components/home/home-page/home-page.component";
 import { ToolbarComponent } from "./components/toolbar/toolbar/toolbar.component";
@@ -71,7 +70,6 @@ export function createTranslateLoader(http: HttpClient) {
     MatInputModule,
     MatExpansionModule,
     FormsModule,
-    ParticlesModule,
     AppRoutingModule,
     MatSidenavModule,
     MatToolbarModule,
