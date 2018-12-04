@@ -59,6 +59,7 @@ export class AccountService {
             }
           }.bind(this)
         );
+        this.authService.logout();
       });
   }
   editAccount(acc: Account): any {
@@ -105,6 +106,7 @@ export class AccountService {
             }
           }.bind(this)
         );
+        this.authService.logout();
       });
   }
   createAccount(acc: Account): void {
@@ -151,6 +153,7 @@ export class AccountService {
             }
           }.bind(this)
         );
+        this.authService.logout();
       });
   }
   constructor(
@@ -195,6 +198,7 @@ export class AccountService {
             }
           }.bind(this)
         );
+        this.authService.logout();
       });
   }
 }

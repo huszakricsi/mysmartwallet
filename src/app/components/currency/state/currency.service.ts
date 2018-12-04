@@ -54,6 +54,7 @@ export class CurrencyService {
             }
           }.bind(this)
         );
+        this.authService.logout();
       });
   }
 }

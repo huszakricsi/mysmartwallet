@@ -51,6 +51,7 @@ export class CategoryService {
             }
           }.bind(this)
         );
+        this.authService.logout();
       });
   }
 }

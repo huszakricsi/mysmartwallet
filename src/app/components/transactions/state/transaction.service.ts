@@ -60,6 +60,7 @@ export class TransactionService {
             }
           }.bind(this)
         );
+        this.authService.logout();
       });
   }
   patchTransaction(transaction: Transaction): any {
@@ -107,6 +108,7 @@ export class TransactionService {
             }
           }.bind(this)
         );
+        this.authService.logout();
       });
   }
   createTransaction(transaction: Transaction): any {
@@ -154,6 +156,7 @@ export class TransactionService {
             }
           }.bind(this)
         );
+        this.authService.logout();
       });
   }
   constructor(
@@ -199,6 +202,7 @@ export class TransactionService {
             }
           }.bind(this)
         );
+        this.authService.logout();
       });
   }
 }

@@ -7,6 +7,7 @@ import { AuthQuery } from "./auth.query";
 import { environment } from "src/environments/environment";
 import { LocalStorageService } from "angular-web-storage";
 import { TranslateService } from "@ngx-translate/core";
+import { Router } from "@angular/router";
 
 @Injectable({
   providedIn: "root"
@@ -28,7 +29,8 @@ export class AuthService {
     private authQuery: AuthQuery,
     public snackBar: MatSnackBar,
     public local: LocalStorageService,
-    private translate: TranslateService
+    private translate: TranslateService,
+    public router: Router
   ) {
     try {
       let auth = createAuth(local.get("auth"));
@@ -169,6 +171,15 @@ export class AuthService {
   }
 
   logout() {
+    this.authStore.update(
+      createAuth({
+        uid: null,
+        client: null,
+        accessToken: null,
+        expiry: null,
+        tokenType: "Bearer"
+      })
+    );
     axios({
       url: environment.api.auth.signOutEndpoint,
       method: "DELETE",
@@ -179,15 +190,6 @@ export class AuthService {
       }
     })
       .then((response: any) => {
-        this.authStore.update(
-          createAuth({
-            uid: null,
-            client: "",
-            accessToken: "",
-            expiry: "",
-            tokenType: "Bearer"
-          })
-        );
         if (!!this.snackBar) {
           this.translate
             .get("COMPONENT.AUTH.AUTHSTATE.GOODBYE")
@@ -203,19 +205,21 @@ export class AuthService {
         }
       })
       .catch((error: any) => {
-        error.response.data.errors.full_messages.forEach(
-          function(error) {
-            if (!!this.snackBar) {
-              this.translate
-                .get("COMPONENT.AUTH.AUTHSTATE.OK")
-                .subscribe((ok: string) => {
-                  this.snackBar.open(error, ok, {
-                    duration: 2000
+        if (!!error.response.data.errors.full_messages) {
+          error.response.data.errors.full_messages.forEach(
+            function(error) {
+              if (!!this.snackBar) {
+                this.translate
+                  .get("COMPONENT.AUTH.AUTHSTATE.OK")
+                  .subscribe((ok: string) => {
+                    this.snackBar.open(error, ok, {
+                      duration: 2000
+                    });
                   });
-                });
-            }
-          }.bind(this)
-        );
+              }
+            }.bind(this)
+          );
+        }
       });
   }
 }
