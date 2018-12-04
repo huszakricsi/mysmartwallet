@@ -50,10 +50,18 @@
       }
     },
     "HOME": {
+      "TRANSACTIONS": "Tranzakciók",
       "ACCOUNTS": "Fiókok"
     },
     "STATISTICS": {},
     "TRANSACTIONS": {
+      "TOGGLEALL": "Összes kijelölésének megváltoztatása",
+      "MIN":"Minimum érték",
+      "MAX":"Maximum érték",
+      "ACCOUNTS": "Fiókok",
+      "RESETFILTERS": "Szűrők visszaállítása",
+      "CATEGORIES": "Kategóriák",
+      "FILTERS": "Szűrők",
       "LASTFIVE": "Utolsó 5 tranzakció",
       "COMMENT": "Komment",
       "DATE": "Időpont",

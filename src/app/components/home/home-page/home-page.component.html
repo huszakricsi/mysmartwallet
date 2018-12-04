@@ -8,20 +8,30 @@
         ><span translate>COMPONENT.HOME.ACCOUNTS</span></mat-card-title
       >
     </mat-card-header>
+    <mat-card-content>
+      <mat-grid-list cols="4" rowHeight="75px">
+        <mat-grid-tile
+          *ngFor="let account of (this.accountQuery.Accounts$ | async)"
+          [colspan]="1"
+          [rowspan]="1"
+        >
+          <mat-card
+            >{{ account.name }} | {{ account.balance }}
+            {{ account.currency }}</mat-card
+          >
+        </mat-grid-tile>
+      </mat-grid-list>
+    </mat-card-content>
   </mat-card>
-  <mat-grid-list cols="4" rowHeight="75px">
-    <mat-grid-tile
-      *ngFor="let account of (this.accountQuery.Accounts$ | async)"
-      [colspan]="1"
-      [rowspan]="1"
-    >
-      <mat-card
-        >{{ account.name }} | {{ account.balance }}
-        {{ account.currency }}</mat-card
-      >
-    </mat-grid-tile>
-  </mat-grid-list>
-  <mat-divider></mat-divider>
+  
+
+
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>
+          <span translate>COMPONENT.HOME.TRANSACTIONS</span>
+      </mat-card-title>
+    </mat-card-header>
   <mat-expansion-panel hideToggle>
     <mat-expansion-panel-header>
       <mat-panel-title>
@@ -71,11 +81,7 @@
             *ngFor="let category of group.childs"
             [value]="category.id"
           >
-            <span translate
-              >CATEGORIES.{{
-                category.label.toUpperCase()
-              }}</span
-            >
+            <span translate>CATEGORIES.{{ category.label.toUpperCase() }}</span>
           </mat-option>
         </mat-optgroup>
       </mat-select></mat-form-field
@@ -83,6 +89,7 @@
     <br />
     <mat-form-field class="full-width">
       <textarea
+        maxlength="250"
         [(ngModel)]="new.comment"
         matInput
         placeholder="{{ 'COMPONENT.TRANSACTIONS.ADDCOMMENT' | translate }}"
@@ -109,10 +116,10 @@
     class="centertext"
     ><span translate>COMPONENT.TRANSACTIONS.NOT_ALLOWED</span></mat-card
   >
-  <mat-divider></mat-divider>
-  <mat-card class="centertext"
-    ><mat-card-title
-      ><span translate>COMPONENT.TRANSACTIONS.LASTFIVE</span></mat-card-title
+
+  <mat-card class="margin-top"
+    ><mat-card-subtitle
+      ><span translate>COMPONENT.TRANSACTIONS.LASTFIVE</span></mat-card-subtitle
     ><mat-card-content>
       <mat-table [dataSource]="this.transactionQuery.LastTransactions$ | async">
         <ng-container matColumnDef="account_id">
@@ -177,4 +184,5 @@
         <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
       </mat-table> </mat-card-content
   ></mat-card>
+</mat-card>
 </mat-accordion>

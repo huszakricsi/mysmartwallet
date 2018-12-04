@@ -38,6 +38,8 @@ import {NgxChartsModule} from '@swimlane/ngx-charts';
 import { IncomeExpenseDiagramComponent } from './components/diagrams/income-expense-diagram/income-expense-diagram.component';
 import { BalanceDiagramComponent } from './components/diagrams/balance-diagram/balance-diagram.component';
 import { ExpenseDispersionDiagramComponent } from './components/diagrams/expense-dispersion-diagram/expense-dispersion-diagram.component';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatTreeModule} from '@angular/material/tree';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
@@ -83,6 +85,8 @@ export function createTranslateLoader(http: HttpClient) {
     MatTableModule,
     MatGridListModule,
     NgxChartsModule,
+    MatCheckboxModule,
+    MatTreeModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

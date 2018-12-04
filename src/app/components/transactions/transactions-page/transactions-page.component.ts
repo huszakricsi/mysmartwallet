@@ -8,6 +8,7 @@ import { CurrencyQuery } from "../../currency/state/currency.query";
 import { MatDialog } from "@angular/material/dialog";
 import { EditDialogComponent } from "../edit-dialog/edit-dialog.component";
 import { TranslateService } from "@ngx-translate/core";
+import { convertInjectableProviderToFactory } from "@angular/core/src/di/injectable";
 
 @Component({
   selector: "app-transactions-page",
@@ -24,6 +25,7 @@ export class TransactionsPageComponent implements OnInit {
     "created_at",
     "edit"
   ];
+  filters = this.defaultFilters();
   new = createTransaction({
     id: null,
     amount: 0,
@@ -72,5 +74,75 @@ export class TransactionsPageComponent implements OnInit {
   }
   createTransaction(transaction: Transaction) {
     this.transactionService.createTransaction(transaction);
+  }
+  defaultFilters() {
+    return {
+      Accounts: this.accountQuery.getAll().map(acc => {
+        return { id: acc.id, name: acc.name, include: true };
+      }),
+      Categories: this.categoryQuery.getAll().map(cat => {
+        return {
+          label: cat.label,
+          include: true,
+          indeterminate: false,
+          childs: cat.childs.map(child => {
+            return {
+              label: child.label,
+              parent: cat,
+              id: child.id,
+              include: true
+            };
+          })
+        };
+      }),
+      Price: {
+        min: 0,
+        max: 999999999
+      },
+      Comment: ""
+    };
+  }
+  groupCategoryIncludeChanged(groupCategory) {
+    for (let child of groupCategory.childs) {
+      child.include = groupCategory.include;
+    }
+  }
+  childCategoryIncludeChanged(childCategory) {
+    let trues = 0;
+    let falses = 0;
+    let parent = null;
+    for (let cat of this.filters.Categories) {
+      if (cat.childs.includes(childCategory)) {
+        parent = cat;
+      }
+    }
+    for (let child of parent.childs) {
+      if (child.include) {
+        trues++;
+      } else {
+        falses++;
+      }
+    }
+    if (trues != 0 && falses != 0) {
+      parent.indeterminate = true;
+    } else if (trues == 0) {
+      parent.indeterminate = false;
+      parent.include = false;
+    } else {
+      parent.indeterminate = false;
+      parent.include = true;
+    }
+  }
+  resetfilters() {
+    this.filters = this.defaultFilters();
+  }
+  toggleAll() {
+    let next = !this.filters.Categories[0].include;
+    for (let cat of this.filters.Categories) {
+      cat.include = next;
+      for (let child of cat.childs) {
+        child.include = next;
+      }
+    }
   }
 }

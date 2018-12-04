@@ -34,11 +34,7 @@
         label="{{ 'CATEGORIES.'+group.label.toUpperCase() | translate }}"
       >
         <mat-option *ngFor="let category of group.childs" [value]="category.id">
-          <span translate
-            >CATEGORIES.{{
-              category.label.toUpperCase()
-            }}</span
-          >
+          <span translate>CATEGORIES.{{ category.label.toUpperCase() }}</span>
         </mat-option>
       </mat-optgroup>
     </mat-select></mat-form-field
@@ -46,6 +42,7 @@
   <br />
   <mat-form-field class="full-width">
     <textarea
+      maxlength="250"
       [(ngModel)]="data.comment"
       matInput
       placeholder="{{ 'COMPONENT.TRANSACTIONS.ADDCOMMENT' | translate }}"

@@ -50,10 +50,18 @@
       }
     },
     "HOME": {
+      "TRANSACTIONS": "Transactions",
       "ACCOUNTS": "Accounts"
     },
     "STATISTICS": {},
     "TRANSACTIONS": {
+      "TOGGLEALL": "Select or deselect all",
+      "MIN":"Minimum amount",
+      "MAX":"Maximum amount",
+      "ACCOUNTS": "Accounts",
+      "RESETFILTERS": "Reset filters",
+      "CATEGORIES": "Categories",
+      "FILTERS": "Filters",
       "LASTFIVE": "Last 5 transactions",
       "COMMENT": "Comment",
       "DATE": "Date",
