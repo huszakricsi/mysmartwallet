@@ -38,6 +38,8 @@ export class TransactionQuery extends QueryEntity<
           entity.comment.toLowerCase().includes(filter.Comment.toLowerCase()) &&
           entity.amount > filter.Price.min &&
           entity.amount < filter.Price.max &&
+          new Date(entity.created_at) >= filter.Date.from &&
+          new Date(entity.created_at) <= filter.Date.to &&
           accepted_account_ids.includes(entity.account_id) &&
           accepted_category_ids.includes(entity.category_id)
       });

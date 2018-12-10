@@ -30,7 +30,7 @@ export class HomePageComponent implements OnInit {
     comment: "",
     category_id: null,
     account_id: null,
-    created_at: null
+    created_at: new Date()
   });
   constructor(
     public transactionQuery: TransactionQuery,
@@ -65,7 +65,7 @@ export class HomePageComponent implements OnInit {
         amount: transaction.amount.valueOf(),
         category_id: transaction.category_id.valueOf(),
         comment: transaction.comment.valueOf(),
-        created_at: transaction.created_at.valueOf(),
+        created_at: new Date(transaction.created_at.valueOf()),
         id: transaction.id.valueOf()
       }
     });

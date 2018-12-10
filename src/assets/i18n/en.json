@@ -55,6 +55,10 @@
     },
     "STATISTICS": {},
     "TRANSACTIONS": {
+      "TIME": "Time",
+      "RESETDATEFILTERS": "Reset date filters",
+      "FROM":"From date:",
+      "TO":"To date:",
       "TOGGLEALL": "Select or deselect all",
       "MIN":"Minimum amount",
       "MAX":"Maximum amount",

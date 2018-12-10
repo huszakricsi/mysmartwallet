@@ -39,7 +39,7 @@ import { IncomeExpenseDiagramComponent } from './components/diagrams/income-expe
 import { BalanceDiagramComponent } from './components/diagrams/balance-diagram/balance-diagram.component';
 import { ExpenseDispersionDiagramComponent } from './components/diagrams/expense-dispersion-diagram/expense-dispersion-diagram.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
-import {MatTreeModule} from '@angular/material/tree';
+import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
@@ -86,7 +86,8 @@ export function createTranslateLoader(http: HttpClient) {
     MatGridListModule,
     NgxChartsModule,
     MatCheckboxModule,
-    MatTreeModule,
+    OwlDateTimeModule, 
+    OwlNativeDateTimeModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

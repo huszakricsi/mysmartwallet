@@ -32,7 +32,7 @@ export class TransactionsPageComponent implements OnInit {
     comment: "",
     category_id: null,
     account_id: null,
-    created_at: null
+    created_at: new Date()
   });
 
   constructor(
@@ -43,7 +43,11 @@ export class TransactionsPageComponent implements OnInit {
     public currencyQuery: CurrencyQuery,
     public translate: TranslateService,
     public dialog: MatDialog
-  ) {}
+  ) {
+    transactionQuery.selectAll().subscribe(v => {
+      this.resetfilters();
+    });
+  }
 
   ngOnInit() {}
   formatDate(date: string) {
@@ -67,7 +71,7 @@ export class TransactionsPageComponent implements OnInit {
         amount: transaction.amount.valueOf(),
         category_id: transaction.category_id.valueOf(),
         comment: transaction.comment.valueOf(),
-        created_at: transaction.created_at.valueOf(),
+        created_at: new Date(transaction.created_at.valueOf()),
         id: transaction.id.valueOf()
       }
     });
@@ -99,7 +103,15 @@ export class TransactionsPageComponent implements OnInit {
         min: 0,
         max: 999999999
       },
-      Comment: ""
+      Comment: "",
+      Date: {
+        from: new Date(
+          this.transactionQuery.getAll()[
+            this.transactionQuery.getAll().length - 1
+          ].created_at
+        ),
+        to: new Date(this.transactionQuery.getAll()[0].created_at)
+      }
     };
   }
   groupCategoryIncludeChanged(groupCategory) {
@@ -135,6 +147,9 @@ export class TransactionsPageComponent implements OnInit {
   }
   resetfilters() {
     this.filters = this.defaultFilters();
+  }
+  resetdatefilters() {
+    this.filters.Date = this.defaultFilters().Date;
   }
   toggleAll() {
     let next = !this.filters.Categories[0].include;

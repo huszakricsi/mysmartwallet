@@ -15,7 +15,7 @@ export function createTransaction({
   comment = "",
   account_id = null,
   category_id = null,
-  created_at = Date.now(),
+  created_at = new Date(),
   isIncome = false
 }: Partial<Transaction>) {
   return {

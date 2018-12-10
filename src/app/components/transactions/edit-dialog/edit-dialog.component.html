@@ -40,6 +40,19 @@
     </mat-select></mat-form-field
   >
   <br />
+  <mat-card>
+    <mat-card-header>
+      <mat-card-subtitle>
+        <span translate>COMPONENT.TRANSACTIONS.TIME</span>
+      </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <owl-date-time-inline
+        [(ngModel)]="data.created_at"
+      ></owl-date-time-inline>
+    </mat-card-content>
+  </mat-card>
+  <br/>
   <mat-form-field class="full-width">
     <textarea
       maxlength="250"
