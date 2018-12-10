@@ -28,7 +28,7 @@ export class TransactionsPageComponent implements OnInit {
   filters = this.defaultFilters();
   new = createTransaction({
     id: null,
-    amount: 0,
+    amount: null,
     comment: "",
     category_id: null,
     account_id: null,
